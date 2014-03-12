@@ -19,44 +19,45 @@ var _keycount = 0;
 
 
 function getMomentInfo(data){
-	
-	$("#momentPanelContainer").empty();
-	
-	var pointdata = data.features;
-	//pointdata = pointdata.reverse();
-	var numberOfPoints = data.features.length;
-	
-	console.log(pointdata);
-	
-	var keycount = 0;
+
+    $("#momentPanelContainer").empty();
+
+    var pointdata = data.features;
+    //pointdata = pointdata.reverse();
+    var numberOfPoints = data.features.length;
+
+    console.log(pointdata);
+
+    //var keycount = 0;
 
 
 
-	if(numberOfPoints === 0) {
-		return;
-	}
-	
-	for(var i=0; i < numberOfPoints; i++) {
-		
-		var pointData = pointdata[i];
-		
-		console.log(i);
-		
-		var imageTimeStamp = pointData.properties.timestamp;
-		
-		var comment = pointData.properties.comment; 
-		
-		console.log(imageTimeStamp);
-		
-		
-		keycount++;
-		
-		createMoments(imageTimeStamp, keycount, comment)
-		
-		
+    if(numberOfPoints === 0) {
+        return;
+    }
 
-	
-	}
+    $.each(data.features, function (keycount, item) {
+
+        //console.log(keycount + 1);
+
+        //$("#surveystat").text(keycount + 1);
+
+        var imageTimeStamp = item.properties.timestamp;
+
+        var comment = item.properties.comment;
+
+        //console.log(imageTimeStamp);
+
+
+        //keycount++;
+        _itemCount = numberOfPoints - keycount;
+
+        createMoments(imageTimeStamp, _itemCount, comment)
+    });
+
+
+
+
 }
 
 function createMoments(imageTimeStamp, count, comment){
