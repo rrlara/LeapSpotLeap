@@ -1,0 +1,51 @@
+body {
+    margin:0;
+    padding:0;
+}
+#map {
+    position:absolute;
+    top:0;
+    bottom:0;
+    width:75%;
+}
+.submitted, .about-text {
+    position: relative;
+    top:175px;
+    width: 370px;
+    z-index: 100;
+    margin: 0 auto;
+    display: none;
+}
+.attribute {
+    position: absolute;
+}
+.crosshair {
+    position: absolute;
+    top:49%;
+    left:49%;
+    z-index: 100;
+}
+.search {
+    top: 35px;
+    position: relative;
+}
+
+.col3 {
+    overflow: scroll;
+}
+@media only screen and (max-width:640px) {
+    .col3 {
+        position: relative;
+    }
+    #map {
+        position: relative;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        height: 400px;
+    }
+}
+
+select {
+    margin: 0;
+}
