@@ -254,7 +254,7 @@ function getCurrentPoints(){
 
                 var geojsonMarkerOptions = {
 				    radius: 8,
-				    fillColor: "#ffae19",
+				    fillColor: "#3c4e5a",
 				    color: "#fff",
 				    weight: 1,
 				    opacity: 1,

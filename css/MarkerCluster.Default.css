@@ -1,24 +1,24 @@
 .marker-cluster-small {
-	
-	background-color: rgba(255, 174, 25, 1);
-	
+
+	background-color: #3c4e5a;
+
 	}
 .marker-cluster-small div {
-	
-	background-color: rgba(0,128,0, 0.0);
+
+	background-color: #3c4e5a;
 	}
 
 .marker-cluster-medium {
-	
-	background-color: rgba(255, 174, 25, 1);
+
+	background-color: #3c4e5a;
 	}
 .marker-cluster-medium div {
-	
+
 	background-color: rgba(0,128,0, 0.0);
 	}
 
 .marker-cluster-large {
-	background-color: rgba(255, 174, 25, 1);
+	background-color: #3c4e5a;
 	}
 .marker-cluster-large div {
 	background-color: rgba(0,128,0, 0.0);
@@ -38,7 +38,7 @@
 	text-align: center;
 	border-radius: 15px;
 	font: 12px 'Gotham-Book';
-	
+
 	}
 .marker-cluster span {
 	line-height: 30px;
