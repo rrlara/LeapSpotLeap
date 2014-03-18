@@ -126,7 +126,7 @@ div#info h2 {
 }
 
 #usersNoteWrapper{
-	height: 50px;
+
 	width: 100%;
   background-color: #fff;
   border-bottom-right-radius: 5px;
@@ -144,7 +144,7 @@ div#info h2 {
   margin-top: 15px;
   margin-right: 10px;
   float: right;
-  color: #444;
+  color: #a7a9ac;;
 }
 
 .icon-location{

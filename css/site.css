@@ -6,7 +6,8 @@ body {
     position:absolute;
     top:0;
     bottom:0;
-    width:75%;
+    width:58.33333%;
+    left:41.6666%;
 }
 .submitted, .about-text {
     position: relative;
@@ -30,11 +31,11 @@ body {
     position: relative;
 }
 
-.col3 {
+.col5 {
     overflow: scroll;
 }
 @media only screen and (max-width:640px) {
-    .col3 {
+    .col5 {
         position: relative;
     }
     #map {
