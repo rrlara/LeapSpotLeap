@@ -187,7 +187,7 @@ function getCurrentPoints(){
 
             //var url = 'https://s3-us-west-2.amazonaws.com/leapspotleap/Observations.json';
 
-            var url = APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/Observations.json"
+            var url = APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + APP_CONFIG.creds.aws.observations +  ""
 
             //Send POST, using JSONP
             $.getJSON(url, postArgs).done(function (data) {

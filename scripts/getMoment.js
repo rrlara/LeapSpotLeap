@@ -33,7 +33,7 @@ function getMoments(){
 
             //var url = 'https://s3-us-west-2.amazonaws.com/leapspotleap/Observations.json';
 
-            var url = APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/Observations.json"
+            var url = APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + APP_CONFIG.creds.aws.observations +  ""
 
             //Send POST, using JSONP
             $.getJSON(url, postArgs).done(function (data) {
@@ -226,7 +226,7 @@ function createMoments(imageTimeStamp, count, comment){
 
   var imageWrapper = $("<div id='usersImageWrapper' class='moment clearfix'></div>").appendTo(momentPanel);
 
-  var momentImageDiv = $('<img width="100%" class= "images1" src="https://s3-us-west-2.amazonaws.com/leapspotleap/' + momentImage  + '.jpg" />').appendTo(imageWrapper);
+  var momentImageDiv = $('<img width="100%" class= "images1" src="'  + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + momentImage  + '.jpg" />').appendTo(imageWrapper);
 
   var momentMapDiv = $('<div id="momentMapDiv" class= "momentMapDiv"></div>').appendTo(momentPanel);
 

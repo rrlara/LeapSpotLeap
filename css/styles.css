@@ -89,9 +89,8 @@ div#info h2 {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
-  margin-top: 20px;
-  box-shadow: rgb(136, 136, 136) 0px 0px 10px;
-  /*border: 1px solid #e8e8e8;*/
+  /*box-shadow: rgb(136, 136, 136) 0px 0px 10px;*/
+  border: 1px solid #e8e8e8;
 
 
 }
@@ -126,7 +125,7 @@ div#info h2 {
 }
 
 #usersNoteWrapper{
-
+  min-height: 50px;
 	width: 100%;
   background-color: #fff;
   border-bottom-right-radius: 5px;
@@ -140,7 +139,7 @@ div#info h2 {
 }
 
 .momentsince{
-  font-size: 14px;
+  font-size: 10px;
   margin-top: 15px;
   margin-right: 10px;
   float: right;
@@ -178,7 +177,7 @@ div#info h2 {
 .momentText{
 	margin-left: 5px;
 	color:#333333;
-	font-size: 12px;
+	font-size: 16px;
 }
 
 #locationNameText{
