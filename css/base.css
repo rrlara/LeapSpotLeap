@@ -47,34 +47,36 @@ table { border-collapse: collapse; border-spacing:0; }
 
 /* @FontFace
 ------------------------------------------------------- */
+
 @font-face {
-	font-family: 'geoPin';
-	src:url('fonts/geoPin.eot?-m2wtyt');
-	src:url('fonts/geoPin.eot?#iefix-m2wtyt') format('embedded-opentype'),
-		url('fonts/geoPin.woff?-m2wtyt') format('woff'),
-		url('fonts/geoPin.ttf?-m2wtyt') format('truetype'),
-		url('fonts/geoPin.svg?-m2wtyt#geoPin') format('svg');
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'geoPin';
+  src:url('fonts/geoPin.eot?-m2wtyt');
+  src:url('fonts/geoPin.eot?#iefix-m2wtyt') format('embedded-opentype'),
+    url('fonts/geoPin.woff?-m2wtyt') format('woff'),
+    url('fonts/geoPin.ttf?-m2wtyt') format('truetype'),
+    url('fonts/geoPin.svg?-m2wtyt#geoPin') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
 [class^="icon-"], [class*=" icon-"] {
-	font-family: 'geoPin';
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
+  font-family: 'geoPin';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
 
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .icon-location:before {
-	content: "\e600";
+  content: "\e600";
 }
+
 
 /* Inline Elements: Defaults
 ------------------------------------------------------- */

@@ -27,11 +27,11 @@ div#infoback {
   overflow: auto;
 }
 
-div#info { 
+div#info {
   margin: 132px 72px;
 }
 
-div#info h2 { 
+div#info h2 {
   margin-bottom: 0px;
 }
 
@@ -46,7 +46,7 @@ div#info h2 {
 {
 	height: 54px;
 	width: 100%;
-	background-color: #0b9cb1;	
+	background-color: #0b9cb1;
 }
 
 #headerTopInner
@@ -74,14 +74,14 @@ div#info h2 {
 	position: absolute;
 	overflow: auto;
 	height:0px;
-	
+
 }
 
 #moments{
-	
+
 	border-bottom: #E3E3E3 1px solid;
-	
-	
+
+
 }
 
 #locationNameWrapper{
@@ -94,7 +94,7 @@ div#info h2 {
 	height: 200px;
 	width: 100%;
 	background:#65BD63;
-	
+
 }
 
 #usersNoteWrapper{
@@ -137,7 +137,7 @@ div#info h2 {
 }
 
 
-#map {   
+#map {
   	position: absolute;
 	top: 54px;
 	bottom: 0;
@@ -246,7 +246,7 @@ div#info h2 {
 
 
 #map-panel{
-	
+
 	right: 329px;
 	height: 175px;
 	width: 166px;
@@ -261,7 +261,7 @@ div#info h2 {
 }
 
 #aerial {
-	
+
 	background-image: url('images/aerial.png');
 	background-size: cover;
 
@@ -297,7 +297,7 @@ div#info h2 {
 	margin-left: 24px;
 	display: inline;
 	margin-top: 20px;
-	
+
 }
 
 .mapicons.activeicon{
@@ -319,7 +319,7 @@ div#info h2 {
 }
 
 .panel{
-	
+
 	background-color: rgb(245, 245, 245);
 	height: 75px;
 	width:270px;
@@ -331,7 +331,7 @@ div#info h2 {
 
 	opacity: 0.8;
 	filter: alpha(opacity=60);
-	
+
 }
 
 .panel.activepanel {
@@ -345,10 +345,10 @@ div#info h2 {
 	-ms-transform:rotate(90deg); /* IE 9 */
 	-webkit-transform:rotate(90deg); /* Safari and Chrome */
 	outline: #023902 solid thin;
-	
+
 	margin-top:5px;
 
-	
+
 }
 
 
@@ -356,50 +356,3 @@ div#info h2 {
 color: #787878;
 font-size: 12px;
 }
-
-
-#map-top-panel{
-	position: absolute;
-	top: 20px;
-    font-style: italic;
-    z-index: 10;
-    margin-top: 40px;
-
-}
-
-
-.Tab1 {
-	width:120px;
-	height:30px;
-	float: left;
-	background-color: #383838;
-	position:relative;
-	cursor: pointer;
-	opacity: 0.8;
-	font-family: 'Gotham-BookItalic';
-	opacity:0.8;
-  	filter:alpha(opacity=60); /* For IE8 and earlier */
-}
-
-.Tab1.active1 {
-	
-	background-color:#0b9cb1;
-	opacity: 1;
-}
-
-.Tab1Text {
-	
-	color: #a09f9f;
-	font-family: 'Gotham-BookItalic';
-	text-align: center;
-	line-height: 26px;
-}
-
-.active1 .Tab1Text {
-	
-	color: #FFFFFF;
-}
-
-
-
-
