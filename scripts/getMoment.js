@@ -1,4 +1,6 @@
-var geoMoments = null;
+var geoJSONMoments = null;
+
+
 
 var momentLat = null;
 var momentLng = null;
@@ -38,14 +40,14 @@ function getMoments(){
             //Send POST, using JSONP
             $.getJSON(url, postArgs).done(function (data) {
 
-                geoMoments = data;
+                geoJSONMoments = data;
 
-                momentLat = String(geoMoments.features[2].geometry.coordinates[1]);
-                momentLng = String(geoMoments.features[2].geometry.coordinates[0]);
+                momentLat = String(geoJSONMoments.features[2].geometry.coordinates[1]);
+                momentLng = String(geoJSONMoments.features[2].geometry.coordinates[0]);
 
                 console.log(momentLng);
 
-                 getMomentInfo(geoMoments);
+                 getMomentInfo(geoJSONMoments);
 
             }).fail(function (jqxhr, textStatus, error) {
                 var err = textStatus + ', ' + error;
@@ -109,7 +111,7 @@ function getLocationMap(MomentID){
 
     var s = new Date(MomentID).toISOString();
 
-    var pointdata = geoMoments.features;
+    var pointdata = geoJSONMoments.features;
     //pointdata = pointdata.reverse();
     //var numberOfPoints = data.features.length;
 
