@@ -47,33 +47,6 @@ table { border-collapse: collapse; border-spacing:0; }
 
 /* @FontFace
 ------------------------------------------------------- */
-@font-face {
-  font-family:'Open Sans';
-    src:url('opensans-regular.eot');
-    src:url('opensans-regular.eot?#iefix') format('embedded-opentype'),
-        url('opensans-regular.woff') format('woff');
-  }
-
-@font-face {
-  font-family:'Open Sans Italic';
-    src:url('opensans-italic.eot');
-    src:url('opensans-italic.eot?#iefix') format('embedded-opentype'),
-        url('opensans-italic.woff') format('woff');
-  }
-
-@font-face {
-  font-family:'Open Sans Bold';
-    src:url('opensans-semibold.eot');
-    src:url('opensans-semibold.eot?#iefix') format('embedded-opentype'),
-        url('opensans-semibold.woff') format('woff');
-  }
-
-@font-face {
-  font-family:'Open Sans Bold Italic';
-    src:url('opensans-semibolditalic.eot');
-    src:url('opensans-semibolditalic.eot?#iefix') format('embedded-opentype'),
-        url('opensans-semibolditalic.woff') format('woff');
-  }
 
 /* Inline Elements: Defaults
 ------------------------------------------------------- */

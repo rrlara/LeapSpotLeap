@@ -17,7 +17,7 @@ var _keycount = 0;
 
 
 
-
+/*
 function getMomentInfo(data){
 
     $("#momentPanelContainer").empty();
@@ -52,13 +52,15 @@ function getMomentInfo(data){
         //keycount++;
         _itemCount = numberOfPoints - keycount;
 
-        createMoments(imageTimeStamp, _itemCount, comment)
+        //createMoments(imageTimeStamp, _itemCount, comment)
     });
 
 
 
 
 }
+
+
 
 function createMoments(imageTimeStamp, count, comment){
 
@@ -86,110 +88,17 @@ function createMoments(imageTimeStamp, count, comment){
 
 function init(){
 
-	//$("#sidebarOff").click(slideLocationPanelWrapperOut);
-
-	$('#individualPlot').click(clickDetailPanelTab2);
-
-	$('#districtLevel').click(clickDetailPanelTab2);
 
 
 }
 
-function clickDetailPanelTab2() {
-	$(this).addClass('active1').siblings().removeClass('active1');
-
-	viewIndividualPlotsStats();
-
-}
-
-function viewIndividualPlotsStats() {
-
-
-
-    if ($('#individualPlot').hasClass('active1')) {
-
-
-        removeMexicoPoints();
-
-        //getSEAPoints();
-
-        if (!geoPointsSEA) {
-        	getCurrentPoints();
-        	console.log("getting SEA Observations");
-	    } else {
-	        addSEAPoints();
-	        console.log("getting SEA Layer");
-	        _SPDEV.Map.map.fitBounds(SEAmarkers);
-	    }
 
 
 
 
 
-    } else {
-
-        //getMexicoPoints();
-
-        removeThailandPoints();
-
-        if (!geoPoints) {
-        getMexicoPoints();
-        console.log("getting Mexico Observations");
-	    } else {
-	        addMexicoPoints();
-	        console.log("getting Mexico Layer");
-	        _SPDEV.Map.map.fitBounds(Mexicomarkers);
-	    }
 
 
-    }
-}
-
-function addMexicoPoints(){
-
-	_SPDEV.Map.map.addLayer(Mexicomarkers);
-	//_SPDEV.Map.map.addLayer(_RouteGeoJSON);
-	//addOutlineDistrictsBoundaries();
-}
-
-function removeMexicoPoints(){
-	_SPDEV.Map.map.removeLayer(Mexicomarkers);
-	//_SPDEV.Map.map.removeLayer(_RouteGeoJSON);
-}
-
-function addSEAPoints(){
-
-	_SPDEV.Map.map.addLayer(SEAmarkers);
-	//_SPDEV.Map.map.addLayer(_RouteGeoJSON);
-	//addOutlineDistrictsBoundaries();
-}
-
-function removeThailandPoints(){
-	_SPDEV.Map.map.removeLayer(SEAmarkers);
-	//_SPDEV.Map.map.removeLayer(_RouteGeoJSON);
-}
-
-
-
-function slideLocationPanelWrapperOut(){
-
-	$("#locationPanelWrapper").animate({"right":"0px"}, "slow");
-
-}
-
-function slideLocationPanelWrapperOut(){
-
-	$("#locationPanelWrapper").animate({"right":"-320px"}, "slow");
-
-}
-
-/*
-function locateMe (position) {
-	console.log(position);
-  geolat = position.coords.latitude;
-  geolon =  position.coords.longitude;
-}
-*/
 
 function onPointResults(data)  {
 
@@ -265,6 +174,7 @@ function onPointResults(data)  {
 
 }
 
+*/
 
 //Load points GeoJSON and add to map
 function getCurrentPoints(){
@@ -289,7 +199,7 @@ function getCurrentPoints(){
 
                  //onPointResults(geoPointsSEA);
 
-                 getMomentInfo(geoPointsSEA);
+                 //getMomentInfo(geoPointsSEA);
 
                  //var image = "https://s3-us-west-2.amazonaws.com/travels2013/" + feature.properties.timestamp;
 
@@ -303,7 +213,7 @@ function getCurrentPoints(){
 
 
 
-                 	//var image = '<img src="https://s3-us-west-2.amazonaws.com/travels2013/' + feature.properties.timestamp + '.jpg" height="100" width="100">';
+                 	//var image = '<img src="https://s3-us-west-2.amazonaws.com/travels2013/' + feature.properties.timestamp + '.jpg" width="100%">';
 				    layer.bindPopup('<h2>' + counts + " - " + feature.properties.comment + '</eh2>' + '<br />' +
 				      '<span class="comments">Time Stamp: ' + feature.properties.timestamp + '</span><br />' +
 				      '<span class="comments">lat/lng: ' + feature.geometry.coordinates[1] + "," + feature.geometry.coordinates[0] + '</span><br />' +
@@ -330,7 +240,7 @@ function getCurrentPoints(){
 					layer.on("mouseout", function(e) {
 			            $("#" + panelDiv).removeClass("activepanel");
 
-			            console.log(panelDiv);
+			           // console.log(panelDiv);
 
 	        		});
 
@@ -383,6 +293,8 @@ function getCurrentPoints(){
 
 }
 
+/*
+
 function imageLoader(comments, timestamp){
 
 	//var imageSize = '<img width="70" height="60" src="https://s3-us-west-2.amazonaws.com/travels2013/' + timestamp + '.jpg" />'
@@ -403,7 +315,7 @@ function imageLoader(comments, timestamp){
         $("#locationPanelWrapper").append(imageDiv);
 
 }
-
+*/
 
 
 function loadLeafMaps(){
@@ -425,7 +337,7 @@ function loadLeafMaps(){
 	//getMexicoPoints();
 	setTimeout(function() {
       // Do something after 5 seconds
-      getCurrentPoints();
+      //getCurrentPoints();
 
 		}, 1000);
 	//getSEAPoints();
