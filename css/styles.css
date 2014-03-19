@@ -107,7 +107,7 @@ div#info h2 {
 #usersImageWrapper{
 	height: 100%;
 	width: 100%;
-	background:#65BD63;
+	background:##3c4e5a;
 
 
 }
@@ -122,6 +122,12 @@ div#info h2 {
   width: 100%
   height: 0px;
   background-color: #ffffff;
+}
+
+.momentMapDiv.activeMomentMap{
+
+  height: 50px;
+
 }
 
 #usersNoteWrapper{

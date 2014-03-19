@@ -5,6 +5,23 @@ var geoJSONMoments = null;
 var momentLat = null;
 var momentLng = null;
 
+function slideMomentToTopOnHover(id){
+
+
+
+  var momentID = id;
+
+
+  //$( 'pad2 keyline-bottom' ).scrollTo(500);
+
+
+
+
+
+}
+
+
+
 function initMoment(){
 
   //$('#content').click(hideMomentMapDiv);
@@ -13,11 +30,9 @@ function initMoment(){
 
     var sourceDiv = this;
     var s = $(sourceDiv).attr('id');
+    
 
-
-    console.log(s);
-
-    //slideMomentMapDiv(s);
+    slideMomentMapDiv(s);
 
 
 
@@ -58,22 +73,34 @@ function getMoments(){
 
 }
 
-function detectElement(arrow) {
-    arrow.parent().find('#momentMapDiv').addClass("activeMomentMap");
-}
 
 
 
 
 function slideMomentMapDiv(s){
 
-    var containerClicked = Date.parse(s);
+    //var containerClicked = Date.parse(s);
+
+    $("[id='" + s + "']").toggleClass( "activePin" );
 
 
-    console.log(containerClicked)
+
+    s = s.split('_')[1];
+
+    console.log(s)
 
 
-    $( '#momentMapDiv' ).toggleClass( "activeMomentMap" );
+    $("[id='" + s + "']").addClass('activeMomentMap').siblings().removeClass('activeMomentMap');
+
+    $('#momentMapDiv').removeClass('activeMomentMap');
+
+    //$($("[id='" + s + "']").children('#momentMapDiv')).removeClass('activeMomentMap');
+
+	   $($("[id='" + s + "']").children('#momentMapDiv')).addClass('activeMomentMap');
+
+
+    //$( '#momentMapDiv').toggleClass( "activeMomentMap" );
+
 
     /*
     //loadLeafMaps();
@@ -220,11 +247,11 @@ function createMoments(imageTimeStamp, count, comment){
 
   var momentImage = imageTimeStamp;
 
-  var momentPanel = $("<div id='" + dateID + "' class='momentContainer clearfix'></div>").appendTo('.pad2');
+  var momentPanel = $("<div id='" + imageTimeStamp + "' class='momentContainer clearfix'></div>").appendTo('.pad2');
 
   var locationNameWrapper = $("<div id='locationNameWrapper' class='moment clearfix'></div>").appendTo(momentPanel);
 
-  var locationName = $("<span class = 'momentText'>" + count + "</span><span class = 'momentText'> - Seattle, WA</span><span id='" + imageTimeStamp + "' class ='icon-location'></span>").appendTo(locationNameWrapper);
+  var locationName = $("<span class = 'momentText'>" + count + "</span><span class = 'momentText'> - Seattle, WA</span><span id='icon_" + imageTimeStamp + "' class ='icon-location'></span>").appendTo(locationNameWrapper);
 
   var imageWrapper = $("<div id='usersImageWrapper' class='moment clearfix'></div>").appendTo(momentPanel);
 

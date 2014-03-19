@@ -229,18 +229,21 @@ function getCurrentPoints(){
 						$("#" + panelDiv).addClass("activepanel");
 
 						console.log(panelDiv);
-						//$("#" + markerid).animate({scrollTop:$("#" + markerid).position().top}, 'slow');
 
+            //$("#" + panelDiv).animate({scrollTop:$("#" + panelDiv).position()}, 'slow');
 
+            slideMomentToTopOnHover(panelDiv);
 
 						//$("#" + markerid).css("color","#009fe4");
 
 					});
 
 					layer.on("mouseout", function(e) {
-			            $("#" + panelDiv).removeClass("activepanel");
 
-			           // console.log(panelDiv);
+
+			           //console.log(panelDiv);
+
+                 slideMomentToTopOnHover(panelDiv);
 
 	        		});
 
