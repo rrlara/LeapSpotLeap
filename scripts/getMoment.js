@@ -30,7 +30,7 @@ function initMoment(){
 
     var sourceDiv = this;
     var s = $(sourceDiv).attr('id');
-    
+
 
     slideMomentMapDiv(s);
 
@@ -82,6 +82,11 @@ function slideMomentMapDiv(s){
     //var containerClicked = Date.parse(s);
 
     $("[id='" + s + "']").toggleClass( "activePin" );
+
+    $("[id='" + s + "']").click(function() {
+        alert($(this).parents("[id='" + s + "']").last().attr('id'));
+        return false;
+    });
 
 
 
@@ -257,12 +262,12 @@ function createMoments(imageTimeStamp, count, comment){
 
   var momentImageDiv = $('<img width="100%" class= "images1" src="'  + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + momentImage  + '.jpg" />').appendTo(imageWrapper);
 
-  var momentMapDiv = $('<div id="momentMapDiv" class= "momentMapDiv"></div>').appendTo(momentPanel);
+  var momentMapDiv = $("<div id='momentMapDiv' class= 'momentMapDiv'></div>").appendTo(momentPanel);
 
 
   var noteWrapper = $("<div id='usersNoteWrapper' class='moment clearfix'></div>").appendTo(momentPanel);
 
-  var comment = $("<span class = 'momentText'>" + comment + "</span>" + "  <span class = 'momentsince'> " + timeSince(imageTimeStamp) + "<span>").appendTo(noteWrapper);
+  var comment = $("<div class = 'momentText'>" + comment + "</div>" + "  <span class = 'momentsince'> " + timeSince(imageTimeStamp) + "<span>").appendTo(noteWrapper);
 
 }
 
