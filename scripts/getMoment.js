@@ -57,6 +57,11 @@ function getMoments(){
 
                 geoJSONMoments = data;
 
+                var orale = geoJSONMoments[2];
+                console.log(orale);
+
+
+
                 momentLat = String(geoJSONMoments.features[2].geometry.coordinates[1]);
                 momentLng = String(geoJSONMoments.features[2].geometry.coordinates[0]);
 
@@ -260,7 +265,9 @@ function createMoments(imageTimeStamp, count, comment){
 
   var imageWrapper = $("<div id='usersImageWrapper' class='moment clearfix'></div>").appendTo(momentPanel);
 
-  var momentImageDiv = $('<img width="100%" class= "images1" src="'  + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + momentImage  + '.jpg" />').appendTo(imageWrapper);
+  // var momentImageDiv = $('<img width="100%" class="lazy image1" data-original="'  + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + momentImage  + '.jpg" />').appendTo(imageWrapper);
+
+  var momentImageDiv = $('<img width="100%" class="image1" src="'  + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + momentImage  + '.jpg" />').appendTo(imageWrapper);
 
   var momentMapDiv = $("<div id='momentMapDiv' class= 'momentMapDiv'></div>").appendTo(momentPanel);
 

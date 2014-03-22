@@ -112,6 +112,10 @@ div#info h2 {
 
 }
 
+.lazy {
+    display: none;
+}
+
 .momentMapDiv{
   width: 100%
   height: 0px;
