@@ -176,6 +176,20 @@ function onPointResults(data)  {
 
 */
 
+function getPopupContent(lat,lng,timestamp,comment){
+
+  var image = '<A HREF="' + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + timestamp + '.jpg" TARGET="NEW"><img width="100" height="100" class="imageThumbnail" src="' + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + timestamp + '.jpg" /></A>';
+
+
+  var content = '<h2>' + comment + '</eh2>' + '<br />' +
+    '<span class="comments">Time Stamp: ' + timestamp + '</span><br />' +
+    '<span class="comments">lat/lng: ' + lat + "," + lng + '</span><br />' +
+    image || "";
+
+    return content;
+
+}
+
 //Load points GeoJSON and add to map
 function getCurrentPoints(){
 
@@ -205,20 +219,16 @@ function getCurrentPoints(){
 
                  function onEachFeature(feature, layer) {
 
-                 	var counts = new String(_keycount--);
+                    var comment = feature.properties.comment;
+                    var timestamp = feature.properties.timestamp;
+                    var lat = feature.geometry.coordinates[1];
+                    var lng = feature.geometry.coordinates[0];
 
-                 	counts = (counts.split('-')[1]);
-
-                 	 var image = '<A HREF="' + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + feature.properties.timestamp + '.jpg" TARGET="NEW"><img width="100" height="100" class="imageThumbnail" src="' + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + feature.properties.timestamp + '.jpg" /></A>';
 
 
 
                  	//var image = '<img src="https://s3-us-west-2.amazonaws.com/travels2013/' + feature.properties.timestamp + '.jpg" width="100%">';
-				    layer.bindPopup('<h2>' + counts + " - " + feature.properties.comment + '</eh2>' + '<br />' +
-				      '<span class="comments">Time Stamp: ' + feature.properties.timestamp + '</span><br />' +
-				      '<span class="comments">lat/lng: ' + feature.geometry.coordinates[1] + "," + feature.geometry.coordinates[0] + '</span><br />' +
-				      image || ""
-				      );
+				    layer.bindPopup(getPopupContent(lat,lng,timestamp,comment));
 
 
 
@@ -255,7 +265,7 @@ function getCurrentPoints(){
 				    });
 
 
-                var geojsonMarkerOptions = {
+        var geojsonMarkerOptions = {
 				    radius: 8,
 				    fillColor: "#3c4e5a",
 				    color: "#fff",
@@ -273,12 +283,14 @@ function getCurrentPoints(){
 
 				});
 
-				SEAmarkers = L.markerClusterGroup({showCoverageOnHover: false,maxClusterRadius: 40});
-				    SEAmarkers.addLayer(_SEAsurveyPointLayerCircles);
-    				_SPDEV.Map.map.addLayer(SEAmarkers);
+				// SEAmarkers = L.markerClusterGroup({showCoverageOnHover: false,maxClusterRadius: 40});
+				//     SEAmarkers.addLayer(_SEAsurveyPointLayerCircles);
+    		// 		_SPDEV.Map.map.addLayer(SEAmarkers);
+
+        _SPDEV.Map.map.addLayer(_SEAsurveyPointLayerCircles);
 
 
-    			_SPDEV.Map.map.fitBounds(SEAmarkers);
+    			_SPDEV.Map.map.fitBounds(_SEAsurveyPointLayerCircles);
 
 
 

@@ -5,6 +5,8 @@ var geoJSONMoments = null;
 var momentLat = null;
 var momentLng = null;
 
+var momentMarker;
+
 function slideMomentToTopOnHover(id){
 
 
@@ -89,7 +91,7 @@ function slideMomentMapDiv(s){
     $("[id='" + s + "']").toggleClass( "activePin" );
 
     $("[id='" + s + "']").click(function() {
-        alert($(this).parents("[id='" + s + "']").last().attr('id'));
+        //alert($(this).parents("[id='" + s + "']").last().attr('id'));
         return false;
     });
 
@@ -97,7 +99,7 @@ function slideMomentMapDiv(s){
 
     s = s.split('_')[1];
 
-    console.log(s)
+    getLocationMap(s);
 
 
     $("[id='" + s + "']").addClass('activeMomentMap').siblings().removeClass('activeMomentMap');
@@ -146,30 +148,64 @@ function hideMomentMapDiv(){
 
 function getLocationMap(MomentID){
 
-    var s = new Date(MomentID).toISOString();
 
-    var pointdata = geoJSONMoments.features;
-    //pointdata = pointdata.reverse();
-    //var numberOfPoints = data.features.length;
+    var momentData = geoJSONMoments.features;
 
-    //console.log(pointdata);
+    var clickedID = null;
 
-    //var keycount = 0;
+    $.each(momentData, function (id, item) {
 
+        var imageTimeStamp = item.properties.timestamp;
 
-    function getId(pointdata, id) {
-      var obj = pointdata.filter(function (val) {
-          return val.id === s;
-      });
-      //filter returns an array, and we just want the matching item
-      return obj[0];
-
-    }
-
-
-    if(numberOfPoints === 0) {
+        if (imageTimeStamp == MomentID) {
+        clickedID = id;
         return;
-    }
+        }
+
+    });
+    console.log(clickedID);
+
+    var momentLat = momentData[clickedID].geometry.coordinates[1];
+
+    var momentLng = momentData[clickedID].geometry.coordinates[0];
+
+    var comment = momentData[clickedID].properties.comment;
+
+    var timestamp = momentData[clickedID].properties.timestamp;
+
+    console.log(momentLat, momentLng);
+
+    zoomToMoment(momentLat, momentLng, comment, timestamp);
+
+}
+
+function zoomToMoment(lat, lng, timestamp, comment){
+
+  if(momentMarker){
+      _SPDEV.Map.map.removeLayer(momentMarker)
+  }
+
+  var momentSpot = new L.LatLng(lat, lng);
+
+  _SPDEV.Map.map.setView(momentSpot,14);
+
+  var geojsonMarkerOptions = {
+      radius: 10,
+      fillColor: "#de6b28",
+      color: "#fff",
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 1
+  };
+
+  momentMarker = L.circleMarker([lat, lng], geojsonMarkerOptions).addTo(_SPDEV.Map.map);
+
+
+
+  momentMarker.bindPopup(getPopupContent(lat,lng,timestamp,comment)).openPopup();
+
+
+  //http://api.tiles.mapbox.com/v3/spatialdev.map-4o51gab2/-73.99,40.70,13/500x300.png
 
 }
 
