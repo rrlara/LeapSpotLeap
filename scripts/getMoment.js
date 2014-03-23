@@ -92,7 +92,7 @@ function slideMomentMapDiv(s){
 
     $("[id='" + s + "']").toggleClass( "activePin" );
 
-    
+
 
 
 
@@ -188,7 +188,7 @@ function zoomToMoment(lat, lng, timestamp, comment, timesince){
 
   var momentSpot = new L.LatLng(lat, lng);
 
-  _SPDEV.Map.map.setView(momentSpot,14);
+  _SPDEV.Map.map.setView(momentSpot,15);
 
   var geojsonMarkerOptions = {
       radius: 10,

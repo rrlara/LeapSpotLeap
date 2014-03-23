@@ -161,6 +161,7 @@ div#info h2 {
   font-size: 36px;
   float: right;
   margin-top: 0px;
+  cursor: pointer;
 }
 
 .icon-location.activePin{
