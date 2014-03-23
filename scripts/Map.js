@@ -176,14 +176,14 @@ function onPointResults(data)  {
 
 */
 
-function getPopupContent(lat,lng,timestamp,comment){
+function getPopupContent(lat,lng,timestamp,comment, timesince){
 
-  var image = '<A HREF="' + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + timestamp + '.jpg" TARGET="NEW"><img width="100" height="100" class="imageThumbnail" src="' + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + timestamp + '.jpg" /></A>';
+  var image = '<A width="100%" HREF="' + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + timestamp + '.jpg" TARGET="NEW"><img width="100" height="100" class="imageThumbnail" src="' + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + timestamp + '.jpg" /></A>';
 
 
-  var content = '<h2>' + comment + '</eh2>' + '<br />' +
-    '<span class="comments">Time Stamp: ' + timestamp + '</span><br />' +
-    '<span class="comments">lat/lng: ' + lat + "," + lng + '</span><br />' +
+  var content = '<h3>' + comment + '</h3>' + '<br />' +
+    '<span class="comments">' + timesince + '</span><br />' +
+    '<span class="comments">(' + lat + "," + lng + ')</span><br />' +
     image || "";
 
     return content;

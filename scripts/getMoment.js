@@ -175,11 +175,13 @@ function getLocationMap(MomentID){
 
     console.log(momentLat, momentLng);
 
-    zoomToMoment(momentLat, momentLng, comment, timestamp);
+    var timesince = timeSince(timestamp);
+
+    zoomToMoment(momentLat, momentLng,timestamp, comment, timesince);
 
 }
 
-function zoomToMoment(lat, lng, timestamp, comment){
+function zoomToMoment(lat, lng, timestamp, comment, timesince){
 
   if(momentMarker){
       _SPDEV.Map.map.removeLayer(momentMarker)
@@ -202,7 +204,7 @@ function zoomToMoment(lat, lng, timestamp, comment){
 
 
 
-  momentMarker.bindPopup(getPopupContent(lat,lng,timestamp,comment)).openPopup();
+  momentMarker.bindPopup(getPopupContent(lat,lng,timestamp,comment,timesince)).openPopup();
 
 
   //http://api.tiles.mapbox.com/v3/spatialdev.map-4o51gab2/-73.99,40.70,13/500x300.png
