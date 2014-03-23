@@ -115,7 +115,7 @@ div#info h2 {
 }
 
 .lazy {
-    display: none;
+    display: block;
 }
 
 .momentMapDiv{
