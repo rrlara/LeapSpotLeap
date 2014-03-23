@@ -204,7 +204,8 @@ function zoomToMoment(lat, lng, timestamp, comment, timesince){
 
 
 
-  momentMarker.bindPopup(getPopupContent(lat,lng,timestamp,comment,timesince)).openPopup();
+  momentMarker.bindPopup(getPopupContent(lat,lng,timestamp,comment,timesince));
+
 
 
   //http://api.tiles.mapbox.com/v3/spatialdev.map-4o51gab2/-73.99,40.70,13/500x300.png
