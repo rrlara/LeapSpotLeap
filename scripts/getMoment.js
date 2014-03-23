@@ -88,12 +88,11 @@ function slideMomentMapDiv(s){
 
     //var containerClicked = Date.parse(s);
 
+    $('.icon-location').removeClass('activePin');
+
     $("[id='" + s + "']").toggleClass( "activePin" );
 
-    $("[id='" + s + "']").click(function() {
-        //alert($(this).parents("[id='" + s + "']").last().attr('id'));
-        return false;
-    });
+    
 
 
 
@@ -102,13 +101,13 @@ function slideMomentMapDiv(s){
     getLocationMap(s);
 
 
-    $("[id='" + s + "']").addClass('activeMomentMap').siblings().removeClass('activeMomentMap');
+    //$("[id='" + s + "']").addClass('activeMomentMap').siblings().removeClass('activeMomentMap');
 
-    $('#momentMapDiv').removeClass('activeMomentMap');
+    //$('#momentMapDiv').removeClass('activeMomentMap');
 
     //$($("[id='" + s + "']").children('#momentMapDiv')).removeClass('activeMomentMap');
 
-	   $($("[id='" + s + "']").children('#momentMapDiv')).addClass('activeMomentMap');
+	   //$($("[id='" + s + "']").children('#momentMapDiv')).addClass('activeMomentMap');
 
 
     //$( '#momentMapDiv').toggleClass( "activeMomentMap" );
