@@ -37,7 +37,10 @@
 
 
 
+
     <script>
+
+
 
 
 
@@ -45,6 +48,10 @@
     $(document).ready(function(){
 
       //init();
+
+      //var viewportHeight = $(window).height();
+      //$('#container').height(viewportHeight - 47);
+
 
       getCurrentPoints();
 
@@ -54,6 +61,8 @@
 
 
       loadLeafMaps();
+
+
 
 
       });
@@ -93,6 +102,9 @@
     <script src="scripts/leaflet.markercluster.js"></script>
     <script src="scripts/getMoment.js" type="text/javascript"></script>
 
+    <script src="scripts/jquery.lazyload.min.js" type="text/javascript"></script>
+
+
 
     <script>
     // $(document).ajaxStop(function(){
@@ -103,11 +115,17 @@
     //  $("img.lazy").lazyload();
     // });
 
-    // $(document).ajaxStop(function(){
-    //     $("img.lazy").lazyload({
-    //         effect: "fadeIn",container: $("#container")
-    //     }).removeClass("lazy");
-    // });
+    $(document).ajaxStop(function(){
+        $("img.lazy").lazyload({
+            effect: "fadeIn",container: $(".col5")
+        }).removeClass("lazy");
+    });
+
+    //$('.col5').trigger('scroll');
+
+    $('.col5').animate({scrollTop:1});
+
+
     </script>
 
 
