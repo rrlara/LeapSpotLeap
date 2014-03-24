@@ -196,7 +196,8 @@ function zoomToMoment(lat, lng, timestamp, comment, timesince){
       color: "#fff",
       weight: 1,
       opacity: 1,
-      fillOpacity: 1
+      fillOpacity: 1,
+      zIndexOffset: 10000
   };
 
   momentMarker = L.circleMarker([lat, lng], geojsonMarkerOptions).addTo(_SPDEV.Map.map);
@@ -205,7 +206,7 @@ function zoomToMoment(lat, lng, timestamp, comment, timesince){
 
   momentMarker.bindPopup(getPopupContent(lat,lng,timestamp,comment,timesince));
 
-
+  
 
   //http://api.tiles.mapbox.com/v3/spatialdev.map-4o51gab2/-73.99,40.70,13/500x300.png
 
