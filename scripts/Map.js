@@ -283,14 +283,14 @@ function getCurrentPoints(){
 
 				});
 
-				// SEAmarkers = L.markerClusterGroup({showCoverageOnHover: false,maxClusterRadius: 40});
-				//     SEAmarkers.addLayer(_SEAsurveyPointLayerCircles);
-    		// 		_SPDEV.Map.map.addLayer(SEAmarkers);
+				SEAmarkers = L.markerClusterGroup({showCoverageOnHover: false,maxClusterRadius: 40});
+				    SEAmarkers.addLayer(_SEAsurveyPointLayerCircles);
+    				_SPDEV.Map.map.addLayer(SEAmarkers);
 
-        _SPDEV.Map.map.addLayer(_SEAsurveyPointLayerCircles);
+        _SPDEV.Map.map.addLayer(SEAmarkers);
 
 
-    			_SPDEV.Map.map.fitBounds(_SEAsurveyPointLayerCircles);
+    			_SPDEV.Map.map.fitBounds(SEAmarkers);
 
 
 
