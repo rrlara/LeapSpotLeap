@@ -1,11 +1,29 @@
 var geoJSONMoments = null;
 
 
+var recentMomentLat = null;
+var recentMomentLng = null;
+
+
 
 var momentLat = null;
 var momentLng = null;
 
+
+
 var momentMarker;
+
+var setMomentView = 13;
+
+var geojsonMarkerOptions = {
+    radius: 10,
+    fillColor: "#de6b28",
+    color: "#fff",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 1,
+    zIndexOffset: 10000
+};
 
 function slideMomentToTopOnHover(id){
 
@@ -71,6 +89,8 @@ function getMoments(){
 
                  getMomentInfo(geoJSONMoments);
 
+                 getMostRecentMoment(geoJSONMoments);
+
             }).fail(function (jqxhr, textStatus, error) {
                 var err = textStatus + ', ' + error;
                 console.log("Request Failed: " + err);
@@ -118,7 +138,7 @@ function slideMomentMapDiv(s){
 
     var momentSpot = new L.LatLng(momentLat, momentLng);
 
-    _LS.Map.map.setView(momentSpot,14);
+    _LS.Map.map._MomentMap(momentSpot,14);
 
     var geojsonMarkerOptions = {
         radius: 10,
@@ -141,6 +161,42 @@ function hideMomentMapDiv(){
       // Animation complete.
       //$('#momentMapDiv').fadeOut();
     });
+
+
+}
+
+function getMostRecentMoment(geoJSONMoments){
+
+  recentMomentLat = geoJSONMoments.features[0].geometry.coordinates[1];
+
+  recentMomentLng = geoJSONMoments.features[0].geometry.coordinates[0];
+
+  var comment = geoJSONMoments.features[0].properties.comment;
+
+  var timestamp = geoJSONMoments.features[0].properties.timestamp;
+
+  var timesince = timeSince(timestamp);
+
+  //console.log(momentLat, momentLng,comment,timesince);
+
+  zoomToMoment(recentMomentLat, recentMomentLat, timestamp, comment, timesince)
+
+  var recentMomentSpot = new L.LatLng(recentMomentLat, recentMomentLng);
+
+  _MomentMap.Map.map.setView(recentMomentSpot,setMomentView);
+
+  momentMarker = L.circleMarker([recentMomentLat, recentMomentLng], geojsonMarkerOptions).addTo(_MomentMap.Map.map);
+
+  putActiveMomentImage(recentMomentLat, recentMomentLat, timestamp, comment, timesince);
+}
+
+function putActiveMomentImage(recentMomentLat, recentMomentLat, timestamp, comment, timesince){
+
+  $("#locationContainer").empty();
+
+  //var imageWrapper = $("<div id='usersImageWrapper' class='moment clearfix'></div>").appendTo("#locationContainer");
+
+  var momentImageDiv = $('<img width="100%" src="'  + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + '/' + timestamp  + '.jpg" />').appendTo("#locationContainer");
 
 
 }
@@ -178,35 +234,29 @@ function getLocationMap(MomentID){
 
     zoomToMoment(momentLat, momentLng,timestamp, comment, timesince);
 
+    putActiveMomentImage(momentLat, momentLng, timestamp, comment, timesince)
+
 }
 
 function zoomToMoment(lat, lng, timestamp, comment, timesince){
 
   if(momentMarker){
-      _SPDEV.Map.map.removeLayer(momentMarker)
+      _MomentMap.Map.map.removeLayer(momentMarker)
   }
 
   var momentSpot = new L.LatLng(lat, lng);
 
-  _SPDEV.Map.map.setView(momentSpot,15);
-
-  var geojsonMarkerOptions = {
-      radius: 10,
-      fillColor: "#de6b28",
-      color: "#fff",
-      weight: 1,
-      opacity: 1,
-      fillOpacity: 1,
-      zIndexOffset: 10000
-  };
-
-  momentMarker = L.circleMarker([lat, lng], geojsonMarkerOptions).addTo(_SPDEV.Map.map);
+  _MomentMap.Map.map.setView(momentSpot,setMomentView);
 
 
 
-  momentMarker.bindPopup(getPopupContent(lat,lng,timestamp,comment,timesince));
+  momentMarker = L.circleMarker([lat, lng], geojsonMarkerOptions).addTo(_MomentMap.Map.map);
 
-  
+
+
+  //momentMarker.bindPopup(getPopupContent(lat,lng,timestamp,comment,timesince));
+
+
 
   //http://api.tiles.mapbox.com/v3/spatialdev.map-4o51gab2/-73.99,40.70,13/500x300.png
 
