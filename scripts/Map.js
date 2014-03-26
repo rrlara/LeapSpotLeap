@@ -260,6 +260,8 @@ function getCurrentPoints(){
 
 				  }
 
+
+
 				 var treeIcon = L.icon({
 				      iconUrl: 'images/tree_small.png'
 				    });
@@ -283,14 +285,14 @@ function getCurrentPoints(){
 
 				});
 
-				// SEAmarkers = L.markerClusterGroup({showCoverageOnHover: false,maxClusterRadius: 10,singleMarkerMode: false});
-				//     SEAmarkers.addLayer(_SEAsurveyPointLayerCircles);
-    		// 		_SPDEV.Map.map.addLayer(SEAmarkers);
+				SEAmarkers = L.markerClusterGroup({showCoverageOnHover: false,maxClusterRadius: 40,spiderfyDistanceMultiplier: 2});
+				    SEAmarkers.addLayer(_SEAsurveyPointLayerCircles);
+    				_SPDEV.Map.map.addLayer(SEAmarkers);
 
-        _SPDEV.Map.map.addLayer(_SEAsurveyPointLayerCircles);
+        _SPDEV.Map.map.addLayer(SEAmarkers);
 
 
-    			_SPDEV.Map.map.fitBounds(_SEAsurveyPointLayerCircles);
+    			_SPDEV.Map.map.fitBounds(SEAmarkers);
 
 
 
