@@ -38,6 +38,9 @@ function slideMomentToTopOnHover(id){
 
 
 
+
+
+
 }
 
 
@@ -53,6 +56,8 @@ function initMoment(){
 
 
     slideMomentMapDiv(s);
+
+    $("#map").click(clickMomentMapExpand);
 
 
 
@@ -191,6 +196,14 @@ function getMostRecentMoment(geoJSONMoments){
 
   $("[id='icon_" + timestamp + "']").addClass( "activePin" );
 }
+
+function clickMomentMapExpand(){
+
+  alert("orale");
+
+}
+
+
 
 function putActiveMomentImage(recentMomentLat, recentMomentLat, timestamp, comment, timesince){
 
