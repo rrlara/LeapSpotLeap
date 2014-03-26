@@ -188,6 +188,8 @@ function getMostRecentMoment(geoJSONMoments){
   momentMarker = L.circleMarker([recentMomentLat, recentMomentLng], geojsonMarkerOptions).addTo(_MomentMap.Map.map);
 
   putActiveMomentImage(recentMomentLat, recentMomentLat, timestamp, comment, timesince);
+
+  $("[id='icon_" + timestamp + "']").addClass( "activePin" );
 }
 
 function putActiveMomentImage(recentMomentLat, recentMomentLat, timestamp, comment, timesince){
