@@ -201,7 +201,7 @@ function getMostRecentMoment(geoJSONMoments){
   _MomentMap.Map.map.scrollWheelZoom.disable();
   _MomentMap.Map.map.boxZoom.disable();
   _MomentMap.Map.map.keyboard.disable();
-  $(".leaflet-control-zoom").css("visibility", "hidden");
+
 }
 
 function clickMomentMapExpand(){
