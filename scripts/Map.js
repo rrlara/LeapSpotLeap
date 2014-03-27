@@ -4,7 +4,7 @@ var geolon = null;
 
 var geoPoints = null;
 
-var geoPointsSEA = null;
+var geoMomentPoints = null;
 
 
 var _SEAsurveyPointLayerCircles;
@@ -13,7 +13,44 @@ var SEAmarkers = null;
 
 var _keycount = 0;
 
+function init(){
 
+
+  loadLeafMaps();
+
+  $('#overallMapContainer').on('click', '#fullextent', function(){
+      backtoFullExtent();
+  });
+
+}
+
+function backtoFullExtent(){
+  _SPDEV.Map.map.fitBounds(_SEAsurveyPointLayerCircles);
+}
+
+function mapOverView(){
+
+  if ($('#map-overview').length == 0) {
+      // Does not exists
+      var mapOverview = $("<div id='map-overview' class='' ></div>").appendTo('#overallMapContainer');
+      var fullExtent = $("<div id='fullextent' class='' ></div>").appendTo(mapOverview);
+      var fullExtent = $("<div id='basemapImage' class='icon-earth' ></div>").appendTo(fullExtent);
+
+      init();
+      getCurrentPoints();
+    }else{
+      $('#map-overview').toggle();
+    }
+
+    $("#mapPinsContainer").toggleClass('activeOverViewMap');
+
+}
+
+function addCachedGeoMomentPoints(){
+
+	_SPDEV.Map.map.addLayer(geoMomentPoints);
+
+}
 
 
 
@@ -86,11 +123,7 @@ function createMoments(imageTimeStamp, count, comment){
 
 
 
-function init(){
 
-
-
-}
 
 
 
@@ -176,6 +209,8 @@ function onPointResults(data)  {
 
 */
 
+
+
 function getPopupContent(lat,lng,timestamp,comment, timesince){
 
   var image = '<A width="100%" HREF="' + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + timestamp + '.jpg" TARGET="NEW"><img width="100" height="100" class="imageThumbnail" src="' + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + timestamp + '.jpg" /></A>';
@@ -206,14 +241,14 @@ function getCurrentPoints(){
             //Send POST, using JSONP
             $.getJSON(url, postArgs).done(function (data) {
 
-                geoPointsSEA = data;
+                geoMomentPoints = data;
 
-                console.log(geoPointsSEA);
+                console.log(geoMomentPoints);
 
 
-                 //onPointResults(geoPointsSEA);
+                 //onPointResults(geoMomentPoints);
 
-                 //getMomentInfo(geoPointsSEA);
+                 //getMomentInfo(geoMomentPoints);
 
                  //var image = "https://s3-us-west-2.amazonaws.com/travels2013/" + feature.properties.timestamp;
 
@@ -285,7 +320,8 @@ function getCurrentPoints(){
 
 				});
 
-				SEAmarkers = L.markerClusterGroup({showCoverageOnHover: false,maxClusterRadius: 40,spiderfyDistanceMultiplier: 2});
+
+				SEAmarkers = L.markerClusterGroup({showCoverageOnHover: false,maxClusterRadius: 80,singleMarkerMode: false});
 				    SEAmarkers.addLayer(_SEAsurveyPointLayerCircles);
     				_SPDEV.Map.map.addLayer(SEAmarkers);
 
@@ -337,7 +373,7 @@ function imageLoader(comments, timestamp){
 
 function loadLeafMaps(){
 
-	_SPDEV.Map = new _SPDEV.LeafletMap("map", {
+	_SPDEV.Map = new _SPDEV.LeafletMap("map-overview", {
 			basemapUrl:'http://{s}.tiles.mapbox.com/v3/spatialdev.map-4o51gab2/{z}/{x}/{y}.png',
 			latitude: 47.6029766,
 		    longitude: -122.30845169999999,

@@ -27,7 +27,7 @@
 
     </script>
 
-    <!--<script src="scripts/Map.js" type="text/javascript"></script>-->
+    <script src="scripts/Map.js" type="text/javascript"></script>
     <script src="scripts/appConfig.js" type="text/javascript"></script>
     <script src="scripts/getMoment.js" type="text/javascript"></script>
 
@@ -62,15 +62,17 @@
       initMoment();
 
 
-      //loadLeafMaps();
+
 
       loadLeafMomentMaps();
 
       var viewportHeight = $(window).height();
 
-      $( "#momentMainContainer" ).height(viewportHeight - 150);
+      $( "#momentMainContainer" ).height(viewportHeight - 204);
 
       $(".leaflet-control-zoom").css("visibility", "hidden");
+
+      $(".leaflet-container .leaflet-control-attribution").css("display", "none");
 
 
       });
@@ -84,7 +86,15 @@
     <!-- <a href='https://www.mapbox.com/' class='mapbox-logo hide-mobile' target='_blank'>
         <img src='assets/mapbox-powered.png' alt=''>
     </a> -->
+    <div id="header">
+      <div id="leapspotLogo" class="leapspotLogo">LeapSpot</div>
+      <div id="mapPinsContainer" class="icon-map" onclick = "mapOverView()">
 
+      </div>
+    </div>
+    <div id="overallMapContainer">
+    
+    </div>
     <div class='col5 fixed-sidebar pin-left leapspot-blue'>
         <nav class='v navigation'>
             <a href='#' class='clearfix strong  pad1y pad2x keyline-bottom'>

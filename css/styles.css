@@ -42,12 +42,55 @@ div#info h2 {
 	z-index:1;
 }
 
-#headerTop
+#header
 {
 	height: 54px;
 	width: 100%;
-	background-color: #0b9cb1;
+	background-color: #3c4e5a;
+  position: relative;
 }
+
+#mapPinsContainer{
+
+  float: right;
+  margin-right: 20px;
+  height: 45px;
+  margin-top: 7px;
+  font-size:36px;
+
+}
+
+.activeOverViewMap{
+  color: #de6b28;
+}
+
+#fullextent{
+	background-color: #fff;
+  width: 26px;
+  position: absolute;
+  top: 68px;
+  left: 10px;
+  height: 30px;
+  /* margin-top: 9px; */
+  z-index: 10;
+  border-radius: 4px;
+  box-shadow: 0 1px 7px rgba(0,0,0,0.65);
+  cursor: pointer;
+}
+
+#basemapImage{
+	/* height: 17px; */
+/* width: 15px; */
+/* position: relative; */
+/* margin: 0 auto; */
+/* top: 5px; */
+  margin-left: 3px;
+  color: #000;
+  font-size: 20px;
+  margin-top: 5px;
+}
+
+
 
 #headerTopInner
 {
@@ -168,6 +211,10 @@ div#info h2 {
 
 .icon-location.activePin{
   color: #de6b28;
+}
+
+.icon-location.whitePin{
+  color: #fff;
 }
 
 
