@@ -21,7 +21,12 @@ function loadLeafMomentMaps(){
       latitude: 47.6029766,
       longitude: -122.30845169999999,
       zoom: 4,
-      detectRetina: true
+      detectRetina: true,
+      zoomControl:false,
+      touchZoom: false,
+	  		doubleClickZoom: false,
+	  		zoomControl: false,
+	  		dragging: false,
 
       });
 
@@ -59,6 +64,7 @@ _MomentMap.LeafletMap = function(mapId, options) {
     this.map  = new L.Map(mapId, {
         'keyboard': keyboard,
         'scrollWheelZoom': scrollWheelZoom,
+
                 });
 
     // create the basemap layer
@@ -70,7 +76,8 @@ _MomentMap.LeafletMap = function(mapId, options) {
           attribution: attributionTxt,
           tileSize: this.tileSize,
         continuousWorld: this.continuousWorld,
-        detectRetina: true
+        detectRetina: true,
+
       });
 
     // Set the map view

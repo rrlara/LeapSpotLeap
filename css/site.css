@@ -27,6 +27,15 @@ body {
   height: 100%;
   background: #f3f3f3;
   margin: 0 auto;
+  overflow-y: auto;
+  padding: 20px;
+
+}
+
+.locationMomentImage{
+
+
+  box-shadow: rgb(136, 136, 136) 0px 0px 10px;
 
 }
 

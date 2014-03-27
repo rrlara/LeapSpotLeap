@@ -83,7 +83,7 @@ function getMoments(){
                 geoJSONMoments = data;
 
                 var orale = geoJSONMoments[2];
-                console.log(orale);
+                //console.log(orale);
 
 
 
@@ -195,11 +195,19 @@ function getMostRecentMoment(geoJSONMoments){
   putActiveMomentImage(recentMomentLat, recentMomentLat, timestamp, comment, timesince);
 
   $("[id='icon_" + timestamp + "']").addClass( "activePin" );
+
+  _MomentMap.Map.map.touchZoom.disable();
+  _MomentMap.Map.map.doubleClickZoom.disable();
+  _MomentMap.Map.map.scrollWheelZoom.disable();
+  _MomentMap.Map.map.boxZoom.disable();
+  _MomentMap.Map.map.keyboard.disable();
+  $(".leaflet-control-zoom").css("visibility", "hidden");
 }
 
 function clickMomentMapExpand(){
 
-  alert("orale");
+  console.log
+  ("orale");
 
 }
 
@@ -211,7 +219,7 @@ function putActiveMomentImage(recentMomentLat, recentMomentLat, timestamp, comme
 
   //var imageWrapper = $("<div id='usersImageWrapper' class='moment clearfix'></div>").appendTo("#locationContainer");
 
-  var momentImageDiv = $('<img width="100%" src="'  + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + '/' + timestamp  + '.jpg" />').appendTo("#locationContainer");
+  var momentImageDiv = $('<img class="locationMomentImage" width="100%" src="'  + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + '/' + timestamp  + '.jpg" />').appendTo("#locationContainer");
 
 
 }
