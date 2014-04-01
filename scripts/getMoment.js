@@ -25,6 +25,8 @@ var geojsonMarkerOptions = {
     zIndexOffset: 10000
 };
 
+var activeMomentData = [];
+
 function slideMomentToTopOnHover(id){
 
 
@@ -50,11 +52,8 @@ function initMoment(){
   //$('#content').click(hideMomentMapDiv);
 
   $('.pad2').on('click', '.icon-location', function(){
-
     var sourceDiv = this;
     var s = $(sourceDiv).attr('id');
-
-
     slideMomentMapDiv(s);
 
     $("#map").click(clickMomentMapExpand);
@@ -125,6 +124,8 @@ function slideMomentMapDiv(s){
 
     getLocationMap(s);
 
+    getCurrentMomentData();
+
 
     //$("[id='" + s + "']").addClass('activeMomentMap').siblings().removeClass('activeMomentMap');
 
@@ -172,6 +173,8 @@ function hideMomentMapDiv(){
 
 function getMostRecentMoment(geoJSONMoments){
 
+  activeMomentData = [];
+
   recentMomentLat = geoJSONMoments.features[0].geometry.coordinates[1];
 
   recentMomentLng = geoJSONMoments.features[0].geometry.coordinates[0];
@@ -184,7 +187,7 @@ function getMostRecentMoment(geoJSONMoments){
 
   //console.log(momentLat, momentLng,comment,timesince);
 
-  zoomToMoment(recentMomentLat, recentMomentLat, timestamp, comment, timesince)
+  zoomToMoment(recentMomentLat, recentMomentLat, timestamp, comment, timesince);
 
   var recentMomentSpot = new L.LatLng(recentMomentLat, recentMomentLng);
 
@@ -201,6 +204,28 @@ function getMostRecentMoment(geoJSONMoments){
   _MomentMap.Map.map.scrollWheelZoom.disable();
   _MomentMap.Map.map.boxZoom.disable();
   _MomentMap.Map.map.keyboard.disable();
+
+  activeMomentData.push({
+      key:   "lat",
+      value: recentMomentLat
+  });
+  activeMomentData.push({
+      key:   "lng",
+      value: recentMomentLng
+  });
+  activeMomentData.push({
+      key:   "comment",
+      value: comment
+  });
+  activeMomentData.push({
+      key:   "timestamp",
+      value: timestamp
+  });
+  activeMomentData.push({
+      key:   "timesince",
+      value: timesince
+  });
+
 
 }
 
@@ -219,10 +244,11 @@ function putActiveMomentImage(recentMomentLat, recentMomentLat, timestamp, comme
 
   //var imageWrapper = $("<div id='usersImageWrapper' class='moment clearfix'></div>").appendTo("#locationContainer");
 
-  var momentImageDiv = $('<img class="locationMomentImage" width="100%" src="'  + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + '/' + timestamp  + '.jpg" />').appendTo("#locationContainer");
+  var momentImageDiv = $('<img class="locationMomentImage" width="100%" height="525px" src="'  + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + '/' + timestamp  + '.jpg" />').appendTo("#locationContainer");
 
 
 }
+
 
 function getLocationMap(MomentID){
 

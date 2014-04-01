@@ -26,8 +26,7 @@ function init(){
 
 }
 
-<<<<<<< HEAD
-=======
+
 // function getCurrentMomentData(){
 //
 //   if(activemomentMarker){
@@ -47,7 +46,6 @@ function init(){
 //
 // }
 
->>>>>>> 08fc89c... disabled the active pin
 function backtoFullExtent(){
   _SPDEV.Map.map.fitBounds(_SEAsurveyPointLayerCircles);
 }
@@ -344,21 +342,14 @@ function getCurrentPoints(){
 
 				});
 
-<<<<<<< HEAD
 
-				SEAmarkers = L.markerClusterGroup({showCoverageOnHover: false,maxClusterRadius: 80,singleMarkerMode: false});
-=======
 				SEAmarkers = L.markerClusterGroup({showCoverageOnHover: false,maxClusterRadius: 60,singleMarkerMode: true,spiderfyOnMaxZoom: false});
->>>>>>> 08fc89c... disabled the active pin
 				    SEAmarkers.addLayer(_SEAsurveyPointLayerCircles);
     				_SPDEV.Map.map.addLayer(SEAmarkers);
 
         _SPDEV.Map.map.addLayer(SEAmarkers);
 
 
-<<<<<<< HEAD
-    			_SPDEV.Map.map.fitBounds(SEAmarkers);
-=======
     		_SPDEV.Map.map.fitBounds(SEAmarkers);
 
         console.log(SEAmarkers);
@@ -372,7 +363,7 @@ function getCurrentPoints(){
         // SEAmarkers.on('click', function (a) {
         //     console.log(a.layer);
         // });
->>>>>>> 08fc89c... disabled the active pin
+
 
 
 
