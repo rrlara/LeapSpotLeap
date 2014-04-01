@@ -412,8 +412,7 @@ function loadLeafMaps(){
 			basemapUrl:'http://{s}.tiles.mapbox.com/v3/spatialdev.map-4o51gab2/{z}/{x}/{y}.png',
 			latitude: 47.6029766,
 		    longitude: -122.30845169999999,
-		    zoom: 4,
-        detectRetina: true
+		    zoom: 4
 
 			});
 
@@ -463,8 +462,7 @@ _SPDEV.LeafletMap = function(mapId, options) {
 			    maxZoom: this.maxZoom,
 			    attribution: attributionTxt,
 			    tileSize: this.tileSize,
-				continuousWorld: this.continuousWorld,
-        detectRetina: true
+				continuousWorld: this.continuousWorld
 			});
 
 		// Set the map view

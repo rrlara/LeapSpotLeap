@@ -395,22 +395,22 @@ function createMoments(imageTimeStamp, count, comment){
 
   var momentImage = imageTimeStamp;
 
-  var momentPanel = $("<div id='" + imageTimeStamp + "' class='momentContainer clearfix'></div>").appendTo('.pad2');
+  var momentPanel = $("<div id='parent_" + imageTimeStamp + "' class='momentContainer clearfix'></div>").appendTo('.pad2');
 
-  var locationNameWrapper = $("<div id='locationNameWrapper' class='moment clearfix'></div>").appendTo(momentPanel);
+  var locationNameWrapper = $("<div id='locationNameWrapper_" + imageTimeStamp + "' class='moment clearfix'></div>").appendTo(momentPanel);
 
   var locationName = $("<span class = 'momentText'>" + count + "</span><span class = 'momentText'> - Seattle, WA</span><span id='icon_" + imageTimeStamp + "' class ='icon-location'></span>").appendTo(locationNameWrapper);
 
-  var imageWrapper = $("<div id='usersImageWrapper' class='moment clearfix'></div>").appendTo(momentPanel);
+  var imageWrapper = $("<div id='usersImageWrapper_" + imageTimeStamp + "' class='moment clearfix'></div>").appendTo(momentPanel);
 
   // var momentImageDiv = $('<img width="100%" class="lazy image1" data-original="'  + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + momentImage  + '.jpg" />').appendTo(imageWrapper);
 
   var momentImageDiv = $('<img width="100%" class="lazy" src="images/loading.gif" data-original="'  + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + momentImage  + '.jpg" />').appendTo(imageWrapper);
 
-  var momentMapDiv = $("<div id='momentMapDiv' class= 'momentMapDiv'></div>").appendTo(momentPanel);
+  //var momentMapDiv = $("<div id='momentMapDiv' class= 'momentMapDiv'></div>").appendTo(momentPanel);
 
 
-  var noteWrapper = $("<div id='usersNoteWrapper' class='moment clearfix'></div>").appendTo(momentPanel);
+  var noteWrapper = $("<div id='usersNoteWrapper_" + imageTimeStamp + "' class='moment clearfix'></div>").appendTo(momentPanel);
 
   var comment = $("<div class = 'momentText'>" + comment + "</div>" + "  <span class = 'momentsince'> " + timeSince(imageTimeStamp) + "<span>").appendTo(noteWrapper);
 
