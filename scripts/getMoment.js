@@ -124,7 +124,7 @@ function slideMomentMapDiv(s){
 
     getLocationMap(s);
 
-    getCurrentMomentData();
+    //getCurrentMomentData();
 
 
     //$("[id='" + s + "']").addClass('activeMomentMap').siblings().removeClass('activeMomentMap');
