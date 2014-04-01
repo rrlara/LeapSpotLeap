@@ -136,7 +136,15 @@ div#info h2 {
   border-bottom-left-radius: 5px;
   /*box-shadow: rgb(136, 136, 136) 0px 0px 10px;*/
   border: 1px solid #e8e8e8;
+  cursor: pointer;
 
+
+}
+
+.momentContainer.momentActive{
+  box-shadow: rgb(136, 136, 136) 0px 0px 10px;
+  border: 0px solid #e8e8e8;
+  background: #e8e8e8;
 
 }
 
@@ -216,6 +224,7 @@ div#info h2 {
 .icon-location.whitePin{
   color: #fff;
 }
+
 
 
 #panelBackground{

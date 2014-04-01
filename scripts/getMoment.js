@@ -51,15 +51,13 @@ function initMoment(){
 
   //$('#content').click(hideMomentMapDiv);
 
-  $('.pad2').on('click', '.icon-location', function(){
+
+  $('.pad2').on('click',".momentContainer", function(){
     var sourceDiv = this;
-    var s = $(sourceDiv).attr('id');
-    slideMomentMapDiv(s);
-
+    var elementDivID = $(sourceDiv).attr('id');
+    console.log(elementDivID);
+    slideMomentMapDiv(elementDivID);
     $("#map").click(clickMomentMapExpand);
-
-
-
   });
 
 
@@ -114,13 +112,19 @@ function slideMomentMapDiv(s){
 
     $('.icon-location').removeClass('activePin');
 
-    $("[id='" + s + "']").toggleClass( "activePin" );
+
+
+    $('.momentContainer').removeClass('momentActive');
+
+    $("[id='" + s + "']").toggleClass( "momentActive" );
 
 
 
 
 
     s = s.split('_')[1];
+
+    $("[id='icon_" + s + "']").toggleClass( "activePin" );
 
     getLocationMap(s);
 
@@ -198,6 +202,8 @@ function getMostRecentMoment(geoJSONMoments){
   putActiveMomentImage(recentMomentLat, recentMomentLat, timestamp, comment, timesince);
 
   $("[id='icon_" + timestamp + "']").addClass( "activePin" );
+
+  $("[id='parent_" + timestamp + "']").toggleClass( "momentActive" );
 
   _MomentMap.Map.map.touchZoom.disable();
   _MomentMap.Map.map.doubleClickZoom.disable();

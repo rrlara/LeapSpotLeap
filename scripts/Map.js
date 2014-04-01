@@ -61,7 +61,7 @@ function mapOverView(){
       init();
       getCurrentPoints();
     }else{
-      $('#map-overview').toggle();
+      $('#map-overview').fadeToggle();
     }
 
     $("#mapPinsContainer").toggleClass('activeOverViewMap');
