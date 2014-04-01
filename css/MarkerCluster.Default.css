@@ -21,6 +21,12 @@
 	border-radius: 20px;
 	border: #FFFFFF solid thin;
 	}
+
+.marker-cluster:hover {
+	box-shadow: rgb(136, 136, 136) 0px 0px 10px;
+
+	}
+
 .marker-cluster div {
 	width: 30px;
 	height: 30px;
@@ -30,8 +36,10 @@
 	text-align: center;
 	border-radius: 15px;
 	font: 18px 'Gotham-Book';
-
+	font-weight:normal;
 	}
+
+
 .marker-cluster span {
 	line-height: 30px;
 	}

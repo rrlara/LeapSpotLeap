@@ -360,6 +360,7 @@ function getCurrentPoints(){
 
         });
 
+
         // SEAmarkers.on('click', function (a) {
         //     console.log(a.layer);
         // });
