@@ -62,6 +62,18 @@ function initMoment(){
 
 
 
+  $('#momentMainContainer').on('click',".locationMomentImage", function(){
+
+    console.log("transfrom");
+
+    $('#momentMainContainer').toggleClass( "momentContainerTransform" );
+
+  });
+
+
+
+
+
 }
 
 
@@ -250,7 +262,7 @@ function putActiveMomentImage(recentMomentLat, recentMomentLat, timestamp, comme
 
   //var imageWrapper = $("<div id='usersImageWrapper' class='moment clearfix'></div>").appendTo("#locationContainer");
 
-  var momentImageDiv = $('<img class="locationMomentImage" width="100%" height="525px" src="'  + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + '/' + timestamp  + '.jpg" />').appendTo("#locationContainer");
+  var momentImageDiv = $('<img class="locationMomentImage" width="100%" src="'  + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + '/' + timestamp  + '.jpg" />').appendTo("#locationContainer");
 
 
 }
@@ -328,25 +340,25 @@ function timeSince(date) {
     var interval = Math.floor(seconds / 31536000);
 
     if (interval > 1) {
-        return interval + " years";
+        return interval + " years ago";
     }
     interval = Math.floor(seconds / 2592000);
     if (interval > 1) {
-        return interval + " months";
+        return interval + " months ago";
     }
     interval = Math.floor(seconds / 86400);
     if (interval > 1) {
-        return interval + " days";
+        return interval + " days ago";
     }
     interval = Math.floor(seconds / 3600);
     if (interval > 1) {
-        return interval + " hours";
+        return interval + " hours ago";
     }
     interval = Math.floor(seconds / 60);
     if (interval > 1) {
-        return interval + " minutes";
+        return interval + " minutes ago";
     }
-    return Math.floor(seconds) + " seconds";
+    return Math.floor(seconds) + " seconds ago";
 
 }
 
@@ -405,7 +417,13 @@ function createMoments(imageTimeStamp, count, comment){
 
   var locationNameWrapper = $("<div id='locationNameWrapper_" + imageTimeStamp + "' class='moment clearfix'></div>").appendTo(momentPanel);
 
-  var locationName = $("<span class = 'momentText'>" + count + "</span><span class = 'momentText'> - Seattle, WA</span><span id='icon_" + imageTimeStamp + "' class ='icon-location'></span>").appendTo(locationNameWrapper);
+  var profileImageWrapper = $("<div class = 'thumbnailProfile'></div>").appendTo(locationNameWrapper);
+
+  var profileNameWrapper = $("<div class = 'profileName'>" + APP_CONFIG.creds.aws.profileName +"</div>").appendTo(locationNameWrapper);
+
+  var mapPin = $("<span id='icon_" + imageTimeStamp + "' class ='icon-location'></span>").appendTo(locationNameWrapper);
+
+  var profileImageDiv = $('<img width="100%" class="profileImage" src="'  + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + APP_CONFIG.creds.aws.profileImage  + '.jpg" />').appendTo(profileImageWrapper);
 
   var imageWrapper = $("<div id='usersImageWrapper_" + imageTimeStamp + "' class='moment clearfix'></div>").appendTo(momentPanel);
 
@@ -418,7 +436,9 @@ function createMoments(imageTimeStamp, count, comment){
 
   var noteWrapper = $("<div id='usersNoteWrapper_" + imageTimeStamp + "' class='moment clearfix'></div>").appendTo(momentPanel);
 
-  var comment = $("<div class = 'momentText'>" + comment + "</div>" + "  <span class = 'momentsince'> " + timeSince(imageTimeStamp) + "<span>").appendTo(noteWrapper);
+  var comment = $("<div class = 'momentText'>" + comment + "</div>").appendTo(noteWrapper);
+
+  var timesince = $("<div class = 'momentsince'> " + timeSince(imageTimeStamp) + "</div>").appendTo(locationNameWrapper);
 
 }
 

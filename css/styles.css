@@ -142,10 +142,18 @@ div#info h2 {
 }
 
 .momentContainer.momentActive{
-  box-shadow: rgb(136, 136, 136) 0px 0px 10px;
+  box-shadow: rgb(119, 119, 119) 0px 0px 10px;
   border: 0px solid #e8e8e8;
   background: #e8e8e8;
 
+}
+
+.momentContainerTransform{
+  height: 100%;
+  position: absolute;
+
+  left: 12%;
+  top: 10%;
 }
 
 #locationNameWrapper{
@@ -204,14 +212,17 @@ div#info h2 {
 
 .momentsince{
   font-size: 10px;
-  float: right;
-  color: #a7a9ac;
+  float: left;
+  color: #333333;
   margin: 10px;
+  position: absolute;
+  left: 42px;
+  top: 16px;
 }
 
 .icon-location{
   color: #3c4e5a;
-  font-size: 36px;
+  font-size: 46px;
   float: right;
   margin-top: 0px;
   cursor: pointer;
@@ -223,6 +234,32 @@ div#info h2 {
 
 .icon-location.whitePin{
   color: #fff;
+}
+
+.thumbnailProfile{
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 5px;
+  top: 3px;
+  border-radius: 30px;
+  background-size: cover;
+}
+
+.profileImage{
+
+  border-radius: 30px;
+  background-size: cover;
+
+}
+
+.profileName{
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #333333;
+  position: absolute;
+  left: 52px;
+  top:7px;
 }
 
 

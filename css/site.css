@@ -31,7 +31,7 @@ body {
 
 
 
-#momentMainContainer{
+.momentMainContainer{
   position:relative;
   width:78%;
   left:22.2%;
@@ -57,7 +57,7 @@ body {
 .locationMomentImage{
 
 
-  box-shadow: rgb(136, 136, 136) 0px 0px 10px;
+  box-shadow: rgb(119, 119, 119) 0px 0px 10px;
 
 }
 

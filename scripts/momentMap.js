@@ -65,6 +65,7 @@ _MomentMap.LeafletMap = function(mapId, options) {
         'keyboard': keyboard,
         'scrollWheelZoom': scrollWheelZoom,
 
+
                 });
 
     // create the basemap layer
@@ -75,7 +76,8 @@ _MomentMap.LeafletMap = function(mapId, options) {
           maxZoom: this.maxZoom,
           attribution: attributionTxt,
           tileSize: this.tileSize,
-        continuousWorld: this.continuousWorld
+        continuousWorld: this.continuousWorld,
+        detectRetina: true
 
       });
 

@@ -463,7 +463,8 @@ _SPDEV.LeafletMap = function(mapId, options) {
 			    maxZoom: this.maxZoom,
 			    attribution: attributionTxt,
 			    tileSize: this.tileSize,
-				continuousWorld: this.continuousWorld
+				continuousWorld: this.continuousWorld,
+        detectRetina: true
 			});
 
 		// Set the map view
