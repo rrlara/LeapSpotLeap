@@ -6,7 +6,9 @@ body {
 
 #leapspotLogo{
   float: left;
-  font-size: 47px;
+  font-size: 24px;
+  margin-left: 23px;
+  margin-top: 11px;
 }
 #map {
     position:absolute;
