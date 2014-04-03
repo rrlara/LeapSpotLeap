@@ -569,6 +569,7 @@ button:disabled:focus,
 img {
   max-width:100%;
   /*vertical-align:top;*/
+  cursor:pointer;
   }
   .center img,
   img.center { margin-left:auto; margin-right:auto; }

@@ -24,6 +24,7 @@
 
 .marker-cluster:hover {
 	box-shadow: rgb(119, 119, 119) 0px 0px 10px;
+	z-index:-10;
 
 	}
 
