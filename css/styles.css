@@ -221,13 +221,15 @@ div#info h2 {
 }
 
 .geoName{
-  font-size: 10px;
-float: left;
-color: #333333;
-margin: 10px;
-position: absolute;
-left: 108px;
-top: 16px;
+  font-size: 14px;
+  float: left;
+  margin: 10px;
+  position: absolute;
+  top: 45px;
+  color: #fff;
+  font-weight: 700;
+  text-shadow: #111 0px 0px 10px;
+  max-width: 250px;
 
 }
 

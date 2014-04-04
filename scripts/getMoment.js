@@ -143,7 +143,7 @@ function slideMomentMapDiv(s){
 
     // $( "[id='geoName_" + s + "']" ).html( " - " + geoName );
 
-    setTimeout(function () { $( "[id='geoName_" + s + "']" ).html(" - " + geoName ); }, 1000);
+    setTimeout(function () { $( "[id='geoName_" + s + "']" ).html(geoName ); }, 1000);
 
 
     getLocationMap(s);
@@ -229,7 +229,7 @@ function getMostRecentMoment(geoJSONMoments){
 
   $("[id='parent_" + timestamp + "']").toggleClass( "momentActive" );
 
-  setTimeout(function () { $( "[id='geoName_" + timestamp + "']" ).html(" - " + geoName ); }, 2000);
+  setTimeout(function () { $( "[id='geoName_" + timestamp + "']" ).html(geoName ); }, 2000);
 
 
   _MomentMap.Map.map.touchZoom.disable();
@@ -339,8 +339,10 @@ function zoomToMoment(lat, lng, timestamp, comment, timesince){
   momentMarker = L.circleMarker([lat, lng], geojsonMarkerOptions).addTo(_MomentMap.Map.map);
 
   if ($('#map-overview').length){
+    var setzoom = 13;
+    _SPDEV.Map.map.setView(momentSpot,setzoom);
     momentOverviewMapMarker = L.circleMarker([lat, lng], geojsonMarkerOptions).addTo(_SPDEV.Map.map);
-    _SPDEV.Map.map.setView(momentSpot,setMomentView);
+
   }
 
 

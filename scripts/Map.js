@@ -64,13 +64,18 @@ function mapOverView(){
 
       var momentSpot = new L.LatLng(activeMomentData[0], activeMomentData[1]);
       //_MomentMap.Map.map.setView(momentSpot,setMomentView);
-      momentOverviewMapMarker = L.circleMarker(momentSpot, geojsonMarkerOptions).addTo(_SPDEV.Map.map);
+
+
 
 
 
       function delayZoom(){
-        _SPDEV.Map.map.setView(momentSpot,10);
+        var setZoom = 13;
+        _SPDEV.Map.map.setView(momentSpot,setZoom);
+        momentOverviewMapMarker = L.circleMarker(momentSpot, geojsonMarkerOptions).addTo(_SPDEV.Map.map);
+
       }
+
 
       setTimeout(function () { delayZoom(); }, 3000);
 
