@@ -220,6 +220,17 @@ div#info h2 {
   top: 16px;
 }
 
+.geoName{
+  font-size: 10px;
+float: left;
+color: #333333;
+margin: 10px;
+position: absolute;
+left: 108px;
+top: 16px;
+
+}
+
 .icon-location{
   color: #3c4e5a;
   font-size: 46px;

@@ -141,6 +141,11 @@ function slideMomentMapDiv(s){
 
     $("[id='icon_" + s + "']").toggleClass( "activePin" );
 
+    // $( "[id='geoName_" + s + "']" ).html( " - " + geoName );
+
+    setTimeout(function () { $( "[id='geoName_" + s + "']" ).html(" - " + geoName ); }, 1000);
+
+
     getLocationMap(s);
 
     //getCurrentMomentData();
@@ -216,11 +221,16 @@ function getMostRecentMoment(geoJSONMoments){
 
 
 
-  putActiveMomentImage(recentMomentLat, recentMomentLat, timestamp, comment, timesince);
+  putActiveMomentImage(recentMomentLat, recentMomentLng, timestamp, comment, timesince);
+
+  getCityCountry(recentMomentLat,recentMomentLng);
 
   $("[id='icon_" + timestamp + "']").addClass( "activePin" );
 
   $("[id='parent_" + timestamp + "']").toggleClass( "momentActive" );
+
+  setTimeout(function () { $( "[id='geoName_" + timestamp + "']" ).html(" - " + geoName ); }, 2000);
+
 
   _MomentMap.Map.map.touchZoom.disable();
   _MomentMap.Map.map.doubleClickZoom.disable();
@@ -235,6 +245,7 @@ function getMostRecentMoment(geoJSONMoments){
   activeMomentData.push([timesince]);
 
   console.log(activeMomentData);
+
 
 
 }
@@ -294,7 +305,9 @@ function getLocationMap(MomentID){
 
     zoomToMoment(momentLat, momentLng,timestamp, comment, timesince);
 
-    putActiveMomentImage(momentLat, momentLng, timestamp, comment, timesince)
+    putActiveMomentImage(momentLat, momentLng, timestamp, comment, timesince);
+
+    getCityCountry(momentLat,momentLng);
     /////////////////////////////////
 
     activeMomentData.push([momentLat]);
@@ -449,7 +462,7 @@ function createMoments(imageTimeStamp, count, comment){
 
   var comment = $("<div class = 'momentText'>" + comment + "</div>").appendTo(noteWrapper);
 
-  var timesince = $("<div class = 'momentsince'> " + timeSince(imageTimeStamp) + "</div>").appendTo(locationNameWrapper);
+  var timesince = $("<div class = 'momentsince'> " + timeSince(imageTimeStamp) + "</div><div id='geoName_" + imageTimeStamp + "' class='geoName'></div>").appendTo(locationNameWrapper);
 
 }
 
