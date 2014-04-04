@@ -15,7 +15,7 @@ var momentMarker;
 
 var momentOverviewMapMarker;
 
-var setMomentView = 13;
+var setMomentView = 10;
 
 var geojsonMarkerOptions = {
     radius: 10,
@@ -69,6 +69,8 @@ function initMoment(){
     console.log("transfrom");
 
     $('#momentMainContainer').toggleClass( "momentContainerTransform" );
+
+    _SPDEV.Map.map.fitBounds(SEAmarkers);
 
   });
 

@@ -69,7 +69,7 @@ function mapOverView(){
 
 
       function delayZoom(){
-        _SPDEV.Map.map.setView(momentSpot,8);
+        _SPDEV.Map.map.setView(momentSpot,10);
       }
 
       setTimeout(function () { delayZoom(); }, 3000);
@@ -254,9 +254,7 @@ function getPopupContent(lat,lng,timestamp,comment, timesince){
   var image = '<A width="100%" HREF="' + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + timestamp + '.jpg" TARGET="NEW"><img width="100" height="100" class="imageThumbnail" src="' + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + timestamp + '.jpg" /></A>';
 
 
-  var content = '<h3>' + comment + '</h3>' + '<br />' +
-    '<span class="comments">' + timesince + '</span><br />' +
-    '<span class="comments">(' + lat + "," + lng + ')</span><br />' +
+  var content = '<div class="popupText" >' + comment + '</div>' + "<br>" +
     image || "";
 
     return content;
@@ -346,7 +344,7 @@ function getCurrentPoints(){
 				    color: "#fff",
 				    weight: 1,
 				    opacity: 1,
-				    fillOpacity: 1
+				    fillOpacity: 0.7
 				};
 
 				_SEAsurveyPointLayerCircles = L.geoJson(data.features, {
@@ -359,7 +357,7 @@ function getCurrentPoints(){
 				});
 
 
-				SEAmarkers = L.markerClusterGroup({showCoverageOnHover: false,maxClusterRadius: 60,singleMarkerMode: true,spiderfyOnMaxZoom: false});
+				SEAmarkers = L.markerClusterGroup({disableClusteringAtZoom: 10, showCoverageOnHover: false,maxClusterRadius: 60,singleMarkerMode: true,spiderfyOnMaxZoom: false});
 				    SEAmarkers.addLayer(_SEAsurveyPointLayerCircles);
     				_SPDEV.Map.map.addLayer(SEAmarkers);
 
