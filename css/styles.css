@@ -60,6 +60,15 @@ div#info h2 {
 
 }
 
+.counter{
+  top:3px;
+  right:200px;
+  position: absolute;
+  background:red;
+  height: 50px;
+  width: 50px;
+}
+
 .activeOverViewMap{
   color: #de6b28;
 }
@@ -231,6 +240,41 @@ div#info h2 {
   text-shadow: #111 0px 0px 10px;
   max-width: 250px;
 
+}
+
+.fa-thumbs-like{
+  position: absolute;
+/* margin-right: 17px; */
+right: 68px;
+top: 408px;
+font-size: 18px;
+color: #fff;
+text-shadow: #111 0px 0px 10px;
+font-weight: bold;
+}
+
+.fa.fa-thumbs-o-up{
+  position: absolute;
+/* margin-right: 17px; */
+right: 45px;
+top: 408px;
+font-size: 20px;
+color: #fff;
+text-shadow: #111 0px 0px 10px;
+}
+
+.fa-thumbs-texts{
+  position: absolute;
+/* margin-right: 17px; */
+right: 10px;
+top: 408px;
+font-size: 18px;
+color: #fff;
+text-shadow: #111 0px 0px 10px;
+}
+
+.ontop{
+  z-index:100;
 }
 
 .icon-location{
