@@ -64,15 +64,15 @@ function initMoment(){
 
 
 
-  $('#momentMainContainer').on('click',".locationMomentImage", function(){
-
-    console.log("transfrom");
-
-    $('#momentMainContainer').toggleClass( "momentContainerTransform" );
-
-    _SPDEV.Map.map.fitBounds(SEAmarkers);
-
-  });
+  // $('#momentMainContainer').on('click',".locationMomentImage", function(){
+  //
+  //   console.log("transfrom");
+  //
+  //   $('#momentMainContainer').toggleClass( "momentContainerTransform" );
+  //
+  //   _SPDEV.Map.map.fitBounds(SEAmarkers);
+  //
+  // });
 
 
 
@@ -314,7 +314,7 @@ function getLocationMap(MomentID){
 
     putActiveMomentImage(momentLat, momentLng, timestamp, comment, timesince);
 
-    
+
 
     getCityCountry(momentLat,momentLng);
     /////////////////////////////////
@@ -473,7 +473,7 @@ function createMoments(imageTimeStamp, count, comment){
 
   var comment = $("<div class = 'momentText'>" + comment + "</div>").appendTo(noteWrapper);
 
-  var thumbsUp = $("<i class='fa-thumbs-like ontop' onclick = 'countClicks()'>Like</i><i class='fa fa-thumbs-o-up ontop'></i><i class='fa-thumbs-texts ontop'>12</i>").appendTo(imageWrapper);
+  var thumbsUp = $("<i class='fa-thumbs-like' onclick = 'countClicks()'>Like</i><i class='fa fa-thumbs-o-up'></i><i class='fa-thumbs-texts'>12</i>").appendTo(imageWrapper);
 
   var timesince = $("<div class = 'momentsince'> " + timeSince(imageTimeStamp) + "</div><div id='geoName_" + imageTimeStamp + "' class='geoName'></div>").appendTo(locationNameWrapper);
 

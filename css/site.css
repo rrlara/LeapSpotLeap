@@ -13,7 +13,7 @@ body {
 #map {
     position:absolute;
     top:54px;
-    height: 150px;
+    height: 100%;
     width:58.33333%;
     left:41.6666%;
 }
@@ -23,7 +23,7 @@ body {
   position:absolute;
   top:54px;
   height: 100%;
-  width:58.4%;
+  width:58.33333%;
   right:0px;;
   background: #f3f3f3;
   z-index:100;
