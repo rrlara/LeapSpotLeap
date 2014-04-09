@@ -62,6 +62,20 @@ function initMoment(){
     $("#map").click(clickMomentMapExpand);
   });
 
+  $('.pad2').on('click',".momentimage", function(){
+    var sourceDiv = this;
+    var imageID = $(sourceDiv).attr('id');
+    console.log(imageID);
+
+    addAppLoader();
+
+    putActiveMomentImagePopup(imageID);
+
+
+
+  });
+
+  $('.appLoader').click(removeAppLoader);
 
 
   // $('#momentMainContainer').on('click',".locationMomentImage", function(){
@@ -74,8 +88,23 @@ function initMoment(){
   //
   // });
 
+}
 
+function addAppLoader(){
+	$('.appLoaderWrapper').css({'display': 'block'});
+}
 
+function removeAppLoader(){
+	$('.appLoaderWrapper').css({'display': 'none'});
+}
+
+function putActiveMomentImagePopup(timestamp){
+
+  $(".appLoaderDataWrapper").empty();
+
+  //var imageWrapper = $("<div id='usersImageWrapper' class='moment clearfix'></div>").appendTo("#locationContainer");
+
+  var momentImageDiv = $('<img id="landingpageImage" class="loading" width="100%" src="'  + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + '/' + timestamp  + '.jpg" />').appendTo(".appLoaderDataWrapper");
 
 
 }
@@ -464,7 +493,7 @@ function createMoments(imageTimeStamp, count, comment){
 
   // var momentImageDiv = $('<img width="100%" class="lazy image1" data-original="'  + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + momentImage  + '.jpg" />').appendTo(imageWrapper);
 
-  var momentImageDiv = $('<img width="100%" class="lazy" src="images/loading.gif" data-original="'  + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + momentImage  + '.jpg" />').appendTo(imageWrapper);
+  var momentImageDiv = $('<img width="100%" id="' + imageTimeStamp + '" class="momentimage lazy" src="images/loading.gif" data-original="'  + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + momentImage  + '.jpg" />').appendTo(imageWrapper);
 
   //var momentMapDiv = $("<div id='momentMapDiv' class= 'momentMapDiv'></div>").appendTo(momentPanel);
 
@@ -473,7 +502,7 @@ function createMoments(imageTimeStamp, count, comment){
 
   var comment = $("<div class = 'momentText'>" + comment + "</div>").appendTo(noteWrapper);
 
-  var thumbsUp = $("<i class='fa-thumbs-like' onclick = 'countClicks()'>Like</i><i class='fa fa-thumbs-o-up'></i><i class='fa-thumbs-texts'>12</i>").appendTo(imageWrapper);
+  //var thumbsUp = $("<i class='fa-thumbs-like' onclick = 'countClicks()'>Like</i><i class='fa fa-thumbs-o-up'></i><i class='fa-thumbs-texts'>12</i>").appendTo(imageWrapper);
 
   var timesince = $("<div class = 'momentsince'> " + timeSince(imageTimeStamp) + "</div><div id='geoName_" + imageTimeStamp + "' class='geoName'></div>").appendTo(locationNameWrapper);
 
