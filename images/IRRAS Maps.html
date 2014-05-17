@@ -1,0 +1,965 @@
+﻿
+
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=7,IE=9" />
+
+		<title>IRRAS Maps</title>
+
+        <!--external stylesheet-->
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />
+        <link href="css/LandingPage.css" rel="stylesheet" type="text/css" />
+		<link href="css/GothaBolIta.css" rel="stylesheet" type="text/css" />
+        <link href="css/GothaBoo.css" rel="stylesheet" type="text/css" />
+        <link href="css/GothaBooIta.css" rel="stylesheet" type="text/css" />
+        <link href="css/GothaLig.css" rel="stylesheet" type="text/css" />
+        <link href="css/GothaLigIta.css" rel="stylesheet" type="text/css" />
+        <link href="css/GothaMedIta.css" rel="stylesheet" type="text/css" />
+        <link href="css/GothaMed.css" rel="stylesheet" type="text/css" />
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="css/leaflet.label.css" />
+        <link rel="stylesheet" href="css/MarkerCluster.css" />
+  		<link rel="stylesheet" href="css/MarkerCluster.Default.css" />
+
+        <link href="css/d3.css" rel="stylesheet" />
+
+
+  		<link href="css/layout-default-latest.css" rel="stylesheet" />
+
+		<!--jQuery goodness-->
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+
+        <!--[if lte IE 8]>
+		     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
+		 <![endif]-->
+
+		<link rel="shortcut icon" href="images/favicon.ico">
+	</head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	    <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+
+     	<script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.2.1"></script>
+
+        <script type="text/javascript">
+            window.L_DISABLE_3D = true;
+        </script>
+
+     	<script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
+
+
+        <!--sdi external javascript-->
+        <script src="scripts/appConfiguration.js" type="text/javascript"></script>
+
+
+        <script src="scripts/Map_Leaflet.js" type="text/javascript"></script>
+        <script src="scripts/CatagoryFinder.js" type="text/javascript"></script>
+
+        <script type="text/javascript" src="scripts/leaflet.markercluster.js"></script>
+
+        <!-- Load Esri Leaflet -->
+    	<script type="text/javascript" src="scripts/esri-leaflet.js"></script>
+
+    	<script type="text/javascript" src="scripts/esriLayers.js"></script>
+
+    	<script type="text/javascript" src="scripts/leaflet.label.js"></script>
+
+        <script src="scripts/lib/jquery.number.min.js"></script>
+
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src="scripts/d3Charts.js"></script>
+
+        <script src="scripts/randomLandingPageImage.js" type="text/javascript"></script>
+         <script src="scripts/lib/jquery.layout-latest.min.js"></script>
+
+
+		<script src="scripts/LandingPage.js" type="text/javascript"></script>
+		<script src="scripts/researchpartners.js"></script>
+    <script src="scripts/SpainColombia.js"></script>
+
+
+        <script type="text/javascript">
+
+        	//Keep a global to track if user is on home image, or has clicked to scroll to the map area.
+  			var _isHome = true; //starts out on home image, so true;
+  			var _layout, _innerLayout; //reference to the layout object
+			//console.log(_isHome);
+
+  			$(document).ready(function () {
+                //Special for IE
+  			    $.support.cors = true;
+
+
+
+            	$("#logo").unbind();
+
+            	setTimeout(function() {
+				      // Do something after 2 seconds
+				      $( "#landingpageImage" ).removeClass( "loading" ).addClass( "landingpageImage" );
+
+				      $('#landingpageImage').randomImage();
+
+				      //removeAppLoader();
+
+
+				      $( "#welcomeMessage" ).fadeIn( "fast" );
+
+				      var width = $(window).width();
+
+				}, 1000);
+
+
+
+
+
+                _layout = $('#contentWrapper').layout({
+                    applyDefaultStyles: true,
+                    east__resizable: false,
+                    north__resizable: false,
+                    east__closable:  false ,
+                    north__closable:  false ,
+                    north__pane_spacing: 0,
+
+                    east__spacing_open: 0,
+                    north__spacing_open: 0,
+                    east__panespacing: 0
+                });
+
+                var viewportHeight = $(window).height();
+
+                //$("#contentWrapper").css("top", viewportHeight - 57);
+                $('#topDIV').height(viewportHeight - 57);
+
+
+
+
+				_layout.sizePane("east", 450);
+				_layout.sizePane("north", 55);
+
+                //layout.sizePane("center", viewportHeight);
+				_layout.panes.east.css('border', 'none');
+				_layout.panes.center.css('border', 'none');
+
+
+                //inner layout for right panel
+				_innerLayout = $("#detailPanel").layout({
+				    north__resizable: false,
+				    north__spacing_open: 0,
+				    north__closable: false,
+				    defaults: {
+				        applyDefaultStyles: false
+				    },
+				    center: {
+				        paneSelector: "#innerLayoutCenter"
+				    },
+				    north: {
+				        paneSelector: "#innerLayoutNorth"
+				    }
+				});
+
+				_innerLayout.panes.north.css('border', 'none');
+				_innerLayout.panes.center.css('border', 'none');
+
+				_innerLayout.sizePane("north", 160);
+
+				_innerLayout.resizeAll();
+
+                init();
+
+                loadLeafMaps();
+
+
+
+                $('.leaflet-bottom leaflet-right').css({ display: 'none' });
+
+
+                $("#welcomeMessage").css("top", viewportHeight - 337);
+
+
+                function jqUpdateSize() {
+
+                    // Get the dimensions of the viewport
+                    var width = $(window).width();
+                    var height = $(window).height();
+                    //console.log(width + " x " + height);
+
+                    if (_isHome == true) {
+
+
+                        _innerLayout.resizeAll();
+
+
+
+                    }
+
+
+                   _SPDEV.Map.map.invalidateSize(true);
+
+                   if (width < _landingpageImageWidth){
+                   	$('.landingpageImage').height('100%');
+
+                   }else{
+                   	$('.landingpageImage').height('');
+
+                   }
+
+
+
+
+                };
+
+                $(document).ready(jqUpdateSize);    // When the page first loads
+                $(window).resize(jqUpdateSize);
+
+                $('.mapicons').on('click', function () {
+
+                    var key = $(this).attr('id');
+
+                    _SPDEV.Map.changeBasemap(key);
+
+                });
+
+                $( "#croptypeSelector" ).mouseleave(function() {
+				  $('#croptypeSelector').css({'display': 'none'});
+				});
+
+				$( "#basemap" ).mouseenter(function() {
+				    $('#basemapPop').css({'display': 'block'});
+				  })
+				  .mouseleave(function() {
+				    $('#basemapPop').css({'display': 'none'});
+				  });
+
+				  $( "#fullextent" ).mouseenter(function() {
+				    $('#fullextentPop').css({'display': 'block'});
+				  })
+				  .mouseleave(function() {
+				    $('#fullextentPop').css({'display': 'none'});
+				  });
+
+
+
+                $("#legendBar").toggle(function () {
+                    //$("#legendContainer").css('overflow','auto');
+                    if($('#individualPlot').hasClass('active1')) {
+			            $("#legendContainer").animate({ width: 200 }, 200);
+	                    $("#legendContainer").animate({ height: 310 }, 200);
+	                    $('.legendText').addClass('legendActive');
+			        }
+			        else {
+			            $("#legendContainer").animate({ width: 200 }, 200);
+	                    $("#legendContainer").animate({ height: 200 }, 200);
+	                    $('.legendText').addClass('legendActive');
+			        }
+
+
+                }, function () {
+	                    $("#legendContainer").animate({ height: 50 }, 200);
+	                    $("#legendContainer").animate({ width: 76 }, 200);
+
+	                    $('.legendText').removeClass('legendActive');
+					});
+
+
+						var initialPos = $('#nav-wrapper').offset().top;
+
+						$('#home-page').scroll(function() {
+							var initialPos = $('#nav-wrapper').offset().top;
+
+							$('#croptypeSelector').css({ 'display': 'none' });
+							if (initialPos <= 465){
+								$( "#welcomeMessage" ).fadeOut( "slow" );
+							}else if(initialPos > 466){
+								$( "#welcomeMessage" ).fadeIn( "slow" );
+
+							}
+
+							if (initialPos <= 5) {
+
+								_layout.resizeAll();
+
+							    $( "#croptypeContainer" ).fadeIn( "slow" );
+
+
+
+
+
+							    $('#legendContainer').css({ 'display': 'block' });
+							    //$('#timelineDiv').css({ 'display': 'block' });
+							    $('.leaflet-bottom leaflet-right').css({ display: 'none' });
+
+
+								$('#topDIV').css({ 'display': 'none' });
+
+								getResearchPartners();
+
+								$('#logo').click(back2LandingPage);
+
+								$('#logo').css( 'cursor', 'pointer' );
+
+
+							} else{
+
+
+							    addOutlineDistrictsBoundaries();
+							    _SPDEV.Map.map.fitBounds(_districtLayerOutline,{
+                      padding: [100, 100]
+                    });
+
+
+							    $( "#croptypeContainer" ).fadeIn( "fast", function() {
+								    // Animation complete
+								     $('#logo').css('cursor','default');
+								  });
+
+
+
+
+
+							}
+
+						});
+
+						function panelReSize() {
+
+							var height = $(window).height();
+
+						    $("#topDIV").height(height - 57);
+						    $("#welcomeMessage").css("top", height - 337);
+                _SPDEV.Map.map.invalidateSize(true);
+
+						};
+
+						var timeOut;
+
+						$(window).resize(function(){
+							clearTimeout(timeOut);
+
+							timeOut = setTimeout (panelReSize, 500);
+
+
+						});
+
+				});
+
+        </script>
+	<body class="claro">
+		<div class="image-overlay">
+
+			<img id="landingpageImage" class="landingpageImage" src="">
+		</div>
+		<div id="home-page" class="home-page">
+			<div id="welcomeMessage" class="clearfix">
+				<div id="titleMessage">IRRAS Data & Maps</div>
+				<div id="message">
+
+                    	 Funded by the Gates Foundation, IRRAS is a 4-year project (2011 - 2015) that investigates promising agricultural technologies for stress-prone
+ 						rainfed rice farmers in Bihar. To do this, IRRAS uses a research pipeline of on-station, on-farm, and village trials.
+ 						This site offers real-time project monitoring data to facilitate comparisons between trial technologies and traditional farmer technologies related to rice, wheat, lentil and chickpea.
+ 						Visit the <a href=' http://irras.in' target='_blank'>IRRAS Homepage</a> and <a href='https://www.facebook.com/IRRAS.Bihar' target='_blank'>IRRAS Facebook page</a> for more information about project objectives and activities.
+
+				</div>
+				<div id="arrowDown" class="icon-arrow" onClick="slideToContent()"></div>
+			</div>
+
+			<div id="apHelpBlock" class="appBlockWrapper">
+		        <div class="appBlock">
+		        </div>
+		        <div class="divCenter" style="">
+		            <div class="apAboutDataWrapper clearfix">
+		            	<div class="closerAboutPopup"></div>
+
+		            	<section class="aboutContent clearfix"><p>IRRAS Mapping Tool</strong> The IRRAS project area includes more than 65 villages in several flood- and drought-prone districts of Bihar, one of India’s poorest states. Learn more about the IRRAS project objectives and download related resources at: <a href=' http://irras.in' target='_blank'>http://irras.in</a><br></p>
+
+						<p>The data on this site is collected on a weekly basis from farmers participating in the IRRAS project. These farmers include: 1) <b>progressive farmers</b>, who are tending a project-sponsored demonstration plot and adjacent control plot that compare improved crop varieties and cultivation practices with traditional farmer varieties and practices; and 2) <b>random farmers</b>, who are more representative of the typical stress-prone rainfed rice farmers of Bihar.</p>
+
+						With this data, we hope to provide an accurate idea about the local costs of production of our recommended crop varieties and related cultivation practices as compared to the traditional varieties and practices.
+
+						All costs are reported in Indian Rupees.</a></section>
+		            </div>
+		        </div>
+		    </div>
+		    <div id="apHelpBlock" class="appLoaderWrapper">
+		        <div class="appLoader"></div>
+		        <div class="divCenterLoader" style="">
+		            <div class="appLoaderDataWrapper clearfix">
+		            	<img id="landingpageImage" class="loading" src="images/loading.gif">
+		            </div>
+		        </div>
+		    </div>
+		    <div id="topDIV" style="height: 600px;"></div>
+			<div id="contentWrapper" style="height:100%;">
+				<div id="emptyTopPanel" class="ui-layout-north mapPanel"></div>
+                    <div class="ui-layout-center mapPanel">
+                        <div id="mapPanel">
+						<div id="map" class="map"></div>
+						<div id="zoomContainer" class="zoomContainer">
+							<div id="zoomInButton" class="zoomButtons"></div>
+							<div id="zoomOutButton" class="zoomButtons"></div>
+
+						</div>
+
+						<div id="viewPointsDiv" class="viewPointsDiv">
+							<div id="viewPointsRadioButton" class="viewPointsRadioButton"></div>
+							<div id="viewPointsText" class="viewPointsText">
+								View Individual Plots
+							</div>
+
+						</div>
+						<div id="timelineDiv" class="timelineDiv">
+							<div class="timelineTitle">Timeline</div>
+							<div id="timelineTop" class="timelineTop">
+								<div id="timelineText">Timeline</div>
+
+								<div id="rabiText" class="seasons">Rabi Season</div>
+								<div id="rabiButtonDiv" value="Rabi" class="seasonalButton"></div>
+								<div id="kharifButtonDiv" value="Kharif" class="seasonalButton"></div>
+								<div id="kharifText" class="seasons">Kharif Season</div>
+
+							</div>
+							<div id="timelineBottom" class="timelineBottom">
+								<div id="yr2013" class="timelineyears">2013</div>
+								<div id="yr2014" class="timelineyears">2014</div>
+								<div id="yr2015" class="timelineyears">2015</div>
+							</div>
+						</div>
+						<div id="map-top-panel" class="clearfix">
+							<div id="districtLevel" class="Tab1 active1">
+								<div id="districtLevelText" class="Tab1Text active1">District Level</div>
+							</div>
+							<div id="individualPlot" class="Tab1">
+								<div id="individualPlotText" class="Tab1Text">Individual Plot</div>
+							</div>
+
+
+						</div>
+						<div id="basemap" class="Tab1">
+								<div id="basemapImage" class="icon-basemap"></div>
+						</div>
+						<div id="fullextent" class="Tab1">
+								<div id="basemapImage" class="icon-earth"></div>
+						</div>
+						<div id="map-panel">
+					   			<div id="aerial" class="mapicons">Aerial</div>
+					   			<div id="darkCanvas" class="mapicons">Dark</div>
+					   			<div id="streets" class="mapicons activeicon">Streets</div>
+					   			<div id="terrain" class="mapicons">Terrain</div>
+					   			<div class="closer"></div>
+				   			</div>
+				   		<div id="basemapPop">Swap Basemap</div>
+				   		<div id="fullextentPop">Full Extent</div>
+						<div id="legendContainer" class="legendContainer legend clearfix">
+
+							<div id ="legendBar">
+								<div id="legendText" class="legendText">Legend</div>
+							</div>
+							<div id="legendDistrict">
+								<div id="markerIcon" class="individualFarmContent"></div><img class="individualFarmContent" height="40" width="30" src="images/bluePin.png"/><span class="individualFarmContentText">
+									Research Partners</span>
+								<div id="hasFarms" class="legendDistrictBlocks">
+									<div id="nurseringseedText" class="legendDistrictBlocksText">District with Data</div>
+								</div>
+								<div id="noFarms" class="legendDistrictBlocks">
+									<div id="nurseringseedText" class="legendDistrictBlocksText">District</div>
+								</div>
+							</div>
+
+							<div id="legendIndividual">
+
+								<div id="noFarms" class="legendDistrictBlocks">
+									<div id="nurseringseedText" class="legendDistrictBlocksTextIndividual"><span class="legendDistrictBlocksTextIndividual">Districts</span></div>
+								</div>
+							</div>
+							<div id="legendIndividualFarms">
+								<div id="farmIconContainer" class="clearfix">
+									<div id="markerIcon" class="individualFarmContent"></div><img class="individualFarmContent" height="20" width="20" src="images/randomfarmer.png"/><span class="individualFarmContentText">
+									Random Farmer</span>
+									<div id="markerIcon" class="individualFarmContent"></div><img class="individualFarmContent" height="20" width="20" src="images/demofarmer.png"/><span class="individualFarmContentText">
+									Demo Farmer</span>
+									<div id="markerIcon" class="individualFarmContent"></div><img class="individualFarmContent" height="20" width="20" src="images/controlfarmer.png"/><span class="individualFarmContentText">
+									Control Farmer</span>
+								</div>
+								<div id="markerIcon" class="individualFarmContent"></div><img class="individualFarmContent" height="20" width="20" src="images/clusterimage.png"/><span class="individualFarmContentText">
+									Farm Cluster</span>
+								<div id="markerIcon" class="individualFarmContent"></div><img class="individualFarmContent" height="40" width="30" src="images/bluePin.png"/><span class="individualFarmContentText">
+									Research Partners</span>
+								<div id="noFarms" class="legendDistrictBlocks">
+									<div id="nurseringseedText" class="legendDistrictBlocksTextIndividual"><span class="individualFarmContentText">Districts</span></div>
+								</div>
+							</div>
+						</div>
+					</div>
+                    </div>
+
+					<div id="detailPanel" class="ui-layout-east detailPanel">
+                        <div id="innerLayoutNorth" class="ui-layout-north">
+						<div id="exportTabWrapper">
+							<div id="districtTitle">Bihar, India</div>
+								<div id="exportTab">
+									<div id ="exportText"><span id="exportIcon" class="icon-CAMERA_new"></span>Export</div>
+
+								</div>
+							</div>
+						<div class="TabWrapper">
+						<div id="summaryTab" class="Tab active">
+							<div id="summaryText" class="TabText active">Summary</div>
+						</div>
+
+							<div id="layersTab" class="Tab">
+								<div id="layersText" class="TabText">Layers*</div>
+							</div>
+
+						</div>
+
+                        </div>
+
+                        <div id="innerLayoutCenter" class="ui-layout-center">
+
+						<div class="layerContainer">
+						<span class="layerDisclaimer">* IRRAS are not the creators of the layer data and cannot ensure its up to date</span>
+
+							<div id="individualPlotTitle">LIST OF LAYERS:</div>
+							<div class=" clearfix checkboxes" id="contextLayerList">
+								<p class="legendTextLayers"><input type="checkbox" id="ABToggle" class="checkboxes" name="ABToggle" onClick="ToggleAB();">MODIS Landcover</p>
+								<span class="layerSource">Source: <a href='https://lpdaac.usgs.gov/products/modis_products_table' target='_blank'>https://lpdaac.usgs.gov/products/modis_products_table</a></span>
+									<div id = "legendLandCover">
+								<table>
+								<tbody><tr valign="middle">
+								<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/GeneralContext/MapServer/2/images/98fb6d62c20377d8d861e56ede28766f"></td>
+								<td class="legendLayersText">Water</td>
+								</tr>
+								<tr valign="middle">
+								<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/GeneralContext/MapServer/2/images/219174efca426a703508be05db3ac470"></td>
+								<td class="legendLayersText">Evergreen Needleleaf forest</td>
+								</tr>
+								<tr valign="middle">
+								<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/GeneralContext/MapServer/2/images/b352ed4af1f2a1556eb165aa9c30e470"></td>
+								<td class="legendLayersText">Evergreen Broadleaf forest</td>
+								</tr>
+								<tr valign="middle">
+								<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/GeneralContext/MapServer/2/images/8aad7601cb1050c556d381ee8809f105"></td>
+								<td class="legendLayersText">Deciduous Needleleaf forest</td>
+								</tr>
+								<tr valign="middle">
+								<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/GeneralContext/MapServer/2/images/d8ccd8246d3dbbc176c2771469927fd1"></td>
+								<td class="legendLayersText">Deciduous Broadleaf forest</td>
+								</tr>
+								<tr valign="middle">
+								<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/GeneralContext/MapServer/2/images/5ae9652a4414f65507d15a62c6cdf75a"></td>
+								<td class="legendLayersText">Mixed forest</td>
+								</tr>
+								<tr valign="middle">
+								<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/GeneralContext/MapServer/2/images/87b0f0fe5ec42aa3cf6be184952e1391"></td>
+								<td class="legendLayersText">Closed shrublands</td>
+								</tr>
+								<tr valign="middle">
+								<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/GeneralContext/MapServer/2/images/901948e19d542281200acd2180c41c8e"></td>
+								<td class="legendLayersText">Open shrublands</td>
+								</tr>
+								<tr valign="middle">
+								<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/GeneralContext/MapServer/2/images/5784e5f3ceb25bfda9794602447b8fa8"></td>
+								<td class="legendLayersText">Woody savannas</td>
+								</tr>
+								<tr valign="middle">
+								<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/GeneralContext/MapServer/2/images/1819770143ca7fc4fa29f06fe624284f"></td>
+								<td class="legendLayersText">Savannas</td>
+								</tr>
+								<tr valign="middle">
+								<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/GeneralContext/MapServer/2/images/b5c3ee43c73775a8b49e866126d69b44"></td>
+								<td class="legendLayersText">Grasslands</td>
+								</tr>
+								<tr valign="middle">
+								<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/GeneralContext/MapServer/2/images/9d0f501b7a616519c2a9d030b4522752"></td>
+								<td class="legendLayersText">Croplands</td>
+								</tr>
+								<tr valign="middle">
+								<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/GeneralContext/MapServer/2/images/d1505065bdb83c32f90afcd8e5cb494c"></td>
+								<td class="legendLayersText">Urban and built-up</td>
+								</tr>
+								<tr valign="middle">
+								<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/GeneralContext/MapServer/2/images/cd89087a1f402782b0726ced3ec10138"></td>
+								<td class="legendLayersText">Barren or sparsely vegetated</td>
+								</tr>
+								</tbody></table>
+							</div>
+								<p class="legendTextLayers">Type of Soil Degradation <input type="checkbox" id="SoilsToggle" class="checkboxes" name="SoilsToggle" onClick="ToggleSoils();"></p>
+								<span class="layerSource">Source: <a href='http://www.isric.org/projects/global-assessment-human-induced-soil-degradation-glasod' target='_blank'>http://www.isric.org/projects/global-assessment-human-induced-soil-degradation-glasod</a></span>
+								<div id = "legendSoilDegradation">
+									<table>
+									<tbody><tr valign="middle">
+									<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/KeyIndicators/MapServer/17/images/fe9de6fd606c8e0858fbe6c09198e22d"></td>
+									<td class="legendLayersText">Deserts</td>
+									</tr>
+									<tr valign="middle">
+									<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/KeyIndicators/MapServer/17/images/52df08920ace234e771c6f6d226665b6"></td>
+									<td class="legendLayersText">Acidification</td>
+									</tr>
+									<tr valign="middle">
+									<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/KeyIndicators/MapServer/17/images/4752c8c252005c922dceda4bbe8c0105"></td>
+									<td class="legendLayersText">Loss of Nutrients</td>
+									</tr>
+									<tr valign="middle">
+									<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/KeyIndicators/MapServer/17/images/15ee17496f3063b0d5cdfa98972534b0"></td>
+									<td class="legendLayersText">Pollution</td>
+									</tr>
+									<tr valign="middle">
+									<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/KeyIndicators/MapServer/17/images/dcf97efe2ea1c86c9e5c0b27e862bd78"></td>
+									<td class="legendLayersText">Salanization</td>
+									</tr>
+									<tr valign="middle">
+									<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/KeyIndicators/MapServer/17/images/2b116d230b29bd50c4b61784b55578b6"></td>
+									<td class="legendLayersText">Active Dunes</td>
+									</tr>
+									<tr valign="middle">
+									<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/KeyIndicators/MapServer/17/images/78dd59deb81565d2f57eda683eb248d3"></td>
+									<td class="legendLayersText">Terrain Deformation</td>
+									</tr>
+									<tr valign="middle">
+									<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/KeyIndicators/MapServer/17/images/d75b5af818bc115a94cdffac80d16bfa"></td>
+									<td class="legendLayersText">Overblowing</td>
+									</tr>
+									<tr valign="middle">
+									<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/KeyIndicators/MapServer/17/images/bd2eeda274e85d13101e7c816775230b"></td>
+									<td class="legendLayersText">Loss of Topsoil</td>
+									</tr>
+									<tr valign="middle">
+									<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/KeyIndicators/MapServer/17/images/46de0fc7516543976a3e7ef85222935d"></td>
+									<td class="legendLayersText">Ice Caps</td>
+									</tr>
+									<tr valign="middle">
+									<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/KeyIndicators/MapServer/17/images/5c7c45e029a32fa58248f6dd77c5bc58"></td>
+									<td class="legendLayersText">Arid Mountain Regions</td>
+									</tr>
+									<tr valign="middle">
+									<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/KeyIndicators/MapServer/17/images/e6d4fd7e4719ad15a8191d16ca4f0f0f"></td>
+									<td class="legendLayersText">Compaction</td>
+									</tr>
+									<tr valign="middle">
+									<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/KeyIndicators/MapServer/17/images/1d9a54d330be64b6fbfc73e8c9a710e2"></td>
+									<td class="legendLayersText">Subsidence of Organic Soils</td>
+									</tr>
+									<tr valign="middle">
+									<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/KeyIndicators/MapServer/17/images/9a493ffcd11517cfce6761bfed0e104f"></td>
+									<td class="legendLayersText">Waterlogging</td>
+									</tr>
+									<tr valign="middle">
+									<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/KeyIndicators/MapServer/17/images/6078cce0b1ad0f0b244460d7a452a796"></td>
+									<td class="legendLayersText">Rock Outcrops</td>
+									</tr>
+									<tr valign="middle">
+									<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/KeyIndicators/MapServer/17/images/641c22702a541f1e5d4216f6c4ab71bd"></td>
+									<td class="legendLayersText">Stable with Permanent Agriculture</td>
+									</tr>
+									<tr valign="middle">
+									<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/KeyIndicators/MapServer/17/images/2832f16617877a8d481bf93a9dc95e9e"></td>
+									<td class="legendLayersText">Stabilized by Human Intervention</td>
+									</tr>
+									<tr valign="middle">
+									<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/KeyIndicators/MapServer/17/images/493fc8857be19151a9908e075ff78c81"></td>
+									<td class="legendLayersText">Stable Under Natural Condition</td>
+									</tr>
+									<tr valign="middle">
+									<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/KeyIndicators/MapServer/17/images/276869d54bc2723b5e50b27eeea8d753"></td>
+									<td class="legendLayersText">Terrain Deformation</td>
+									</tr>
+									<tr valign="middle">
+									<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/KeyIndicators/MapServer/17/images/f21f97720fc7e9e7e6af9ab2ae00c45e"></td>
+									<td class="legendLayersText">Loss of Topsoil</td>
+									</tr>
+									<tr valign="middle">
+									<td><img src="http://dev.harvestchoice.org/arcgis/rest/services/gatesesp/KeyIndicators/MapServer/17/images/3c81ef578f307e205b97aa28d508a092"></td>
+									<td class="legendLayersText">Salt Flats</td>
+									</tr>
+									</tbody></table>
+
+							</div>
+
+							</div>
+						</div>
+						<div id="summaryDetailContainer">
+						</div>
+						<div id="individualPlotContainer">
+							<img class="arrowInfo" src="images/arrow.png" />
+							<div id="individualPlotTitle"></div>
+						</div>
+                        </div>
+					</div>
+			<div id="nav-wrapper" class="nav-wrapper">
+			<div class="nav-bar">
+				<div id="aboutDiv">
+					<div id="infoimage" class="icon-INFO_new"></div>
+				</div>
+				<div id = "croptypeContainer">
+				<div id="croptypePulldownContainer">
+					<img class="croptypeArrows" src="images/croptypeArrows.png" />
+					<div id="cropText">ALL</div>
+				</div>
+				<div id="croptypeText">CROP TYPE:</div>
+				<div id="croptypeSelector">
+					<div class="selectorWrapper">
+					<div class="selectorText">ALL</div>
+					</div>
+					<div class="topline"></div>
+				<div class="selectorWrapper">
+					<div class="selectorText">WHEAT</div>
+					</div>
+					<div class="topline"></div>
+					<div class="selectorWrapper">
+						<div class="selectorText">LENTIL</div>
+					</div>
+					<div class="topline"></div>
+					<div class="selectorWrapper">
+						<div class="selectorText">CHICKPEA</div>
+					</div>
+					<div class="topline"></div>
+					<div class="selectorWrapper">
+						<div class="selectorText">RICE</div>
+					</div>
+				</div>
+				</div>
+
+
+				<div id="logoDiv" class="menusTabs">
+					<div id="logoText">
+						<img id="logo" class="logo" src="images/logo_CRS.png"/>
+					</div>
+				</div>
+			</div>
+		</div>
+
+			<div id="topPanelWrapper" class="topPanelWrapper">
+				<div id="topPanel" class="topPanel">
+					<div id="topPanelTextDiv" class="topPanelTextDiv">
+						<div id="topPanelText" class="topPanelText">
+							Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
+						</div>
+					</div>
+					<div id="topPanelPulldownMenu" class="topPanelPulldownMenu">
+						<div id="dropDownDiv" class="dropDownDiv">
+							<select name="cropCatagory" size="1" id="cropCatagory" onchange="getDistrictData()">
+					           <option selected="selected">Rice</option>
+					           <option>Wheat</option>
+					           <option>Lentil</option>
+					        </select>
+
+							<div id="dropDownButton" class="dropDownButton">
+								<div id="arrowDropDown" class="icon-arrow-down"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="bodyPanelWrapper" class="fullwidth">
+				<div id="bodyPanelcontainer" class="bodyPanelcontainer">
+
+				</div>
+			</div>
+			<div id="statsPanelWrapper" class="fullwidth">
+				<div id="statsPanel" class="statsPanel">
+					<div id = "statsPanelMargin">
+						<div id = "quickStatsWrapper">
+							<div id="quickStatsText">QUICK STATS</div>
+							<div id="demoPlotText">- DEMO PLOT: SWARNA SB1 + BMP</div>
+						</div>
+<!--						<div id="pieChartWrapper">
+							<img id="piechart" class="piechart" src="images/piechart.png"/>
+							<div id="piePercentage">90%</div>
+							<div id="pieText">SED UT PERSPICIATIS OMNIS ISTE NATUS UNDE OMNIS</p></div>
+						</div>-->
+                        <div class="clearfix">
+                        <div id="uxThisWeek" class="surveyStatsWrapper">
+                            <div class="surveyStatsTitle">This week:</div>
+                            <div class="surveyStats">
+                                <table>
+                                    <tr>
+                                        <td>New Farms Registered:</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Surveys Taken:
+                                        </td>
+                                        <td>
+                                            0
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="uxAllTime" class="surveyStatsWrapper">
+                            <div class="surveyStatsTitle">Total:</div>
+                            <div class="surveyStats">
+                                <table>
+                                    <tr>
+                                        <td>Total Farms Registered:</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Surveys Taken:
+                                        </td>
+                                        <td>
+                                            0
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        </div>
+						<div id = "statsNumberWrapper">
+							<div id = "numberWrapperLeft" class="numberLeftLeft">
+								<div id="moneyTitle" class="moneyStats">MAIN PLOT FERTIILZER</div>
+								<div id="moneyStats1" class="moneyStats"></div>
+								<div id ="moneyStats1Text" class="moneyStats">Total Hours Spent</div>
+								<div id ="moneyStats1Icon">
+									<img id="leaficon" class="leaficon" src="images/leaf_icon.png"/>
+								</div>
+								<div id="moneyStats2" class="moneyStats"></div>
+								<div id="moneyStats2Text" class="moneyStats">Total Cost</div>
+								<div id ="moneyStats2Icon">
+									<img id="bookicon" class="bookicon" src="images/bookicon.png"/>
+								</div>
+							</div>
+							<div id = "numberWrapperRight" class="numberLeftRight">
+								<div id="popTitle" class="popStats">MAIN PLOT PLOW</div>
+								<div id="popStats1" class="popStats"></div>
+								<div id ="popStats1Text" class="popStats">Total Hours Spent</div>
+								<div id ="popStats1Icon">
+									<img id="popicon" class="popicon" src="images/popicon.png"/>
+								</div>
+								<div id="popStats2" class="popStats"></div>
+								<div id="popStats2Text" class="popStats">Total Cost</div>
+								<div id ="popStats2Icon"></div>
+							</div>
+
+						</div>
+						<div id="individualPlotStatPanel">
+							<div id="plotLineGrachDiv"></div>
+							<div id="plotLineLegend">
+								<div id="nurseringseed" class="plotLineLegendBlocks">
+									<div id="nurseringseedText" class="plotLineLegendBlocksText">Rice</div>
+								</div>
+								<div id="nurseringseed" class="plotLineLegendBlocks">
+									<div id="nurseringseedText" class="plotLineLegendBlocksText">Beans</div>
+								</div>
+								<div id="nurseringseed" class="plotLineLegendBlocks">
+									<div id="nurseringseedText" class="plotLineLegendBlocksText">Lentils</div>
+								</div>
+								<div id="nurseringseed" class="plotLineLegendBlocks">
+									<div id="nurseringseedText" class="plotLineLegendBlocksText">Wheat</div>
+								</div>
+								<div id="nurseringseed" class="plotLineLegendBlocks">
+									<div id="nurseringseedText" class="plotLineLegendBlocksText">Asaparagus</div>
+								</div>
+								<div id="nurseringseed" class="plotLineLegendBlocks">
+									<div id="nurseringseedText" class="plotLineLegendBlocksText">Apple</div>
+								</div>
+								<div id="nurseringseed" class="plotLineLegendBlocks">
+									<div id="nurseringseedText" class="plotLineLegendBlocksText">Soils</div>
+								</div>
+								<div id="nurseringseed" class="plotLineLegendBlocks">
+									<div id="nurseringseedText" class="plotLineLegendBlocksText">Rainfall</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		</div>
+		<form method="post" action="" style="height: 0px; width: 0px; display: none;" class="dlform" id="downloadform" target="_blank">
+			<input type="hidden" name="report" class="ri" id="reportinput" value="" />
+			<input type="hidden" name="filename" class="fn" id="filename" value="IRRASExport" />
+			<input type="hidden" name="s" class="s" id="s" value="" />
+			<input type="hidden" name="numberofcolumns" class="rit" id="numberofcolumns" value="pdf" />
+		</form>
+	    <div id="exportOptions">
+        <div class="clearfix">
+            <div id="exportTriangle"></div>
+            <div id="exportTitle">Export</div>
+            <div aria-hidden="true" class="icon-button_close" id="exportClose"></div>
+        </div>
+        <div id="exportOptionsPanel">
+            <div id="exportLayoutContainer" class="exportOptionsContainer clearfix">
+                <div class="exportGroupTitle">What element(s) would you like to include in the exported image?</div>
+                <div class="exportOptionsGroup">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div id="optionalOutputMap" class="checkbox checked"></div>
+                                </td>
+                                <td>Map</td>
+                                <td>
+                                    <div id="optionalDistrictTrends" class="checkbox"></div>
+                                </td>
+                                <td>District Trends</td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div id="optionalOutputLegend" class="checkbox checked"></div>
+                                </td>
+                                <td>Legend</td>
+                                <td>
+                                    <div id="optionalFarmSummary" class="checkbox"></div>
+                                </td>
+                                <td>
+                                   Farm Summary
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div id="optionalDistrictSummary" class="checkbox"></div>
+                                </td>
+                                <td>District summary</td>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="exportOptionsContainer" class="exportOptionsContainer clearfix">
+                    <div class="exportOptionsGroup">
+                        <div class="exportGroupTitle">Image format:</div>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div id="pngImageFormat" class="exportRadioButtonUnselected exportRadioButtonSelected"></div>
+                                    </td>
+                                    <td>png</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="executeExportButton">EXPORT</div>
+            </div>
+        </div>
+        <div id="exportWaitingPanel" style="display: none;">
+            <div class="knightRiderLoader" style="display: none;"></div>
+            <div class="imageOpenButton" style="display: none;">
+                <div style="text-align: left;">Image rendering complete. Click 'Open Image' to view the image in a new tab, or click 'Reset' to return to the export window.</div>
+                <div style="margin-top: 30px;">
+                    <a href="" target="_blank">Open Image</a>
+                    <span class="killOpenButton">Reset</span>
+                </div>
+            </div>
+            <div id="exportMessage" style="font-size: 11px; float: left; margin-top: 16px;"></div>
+        </div>
+    </div>
+</body>
+<script src="scripts/print.js"></script>
+
+</html>

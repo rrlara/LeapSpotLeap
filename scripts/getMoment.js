@@ -67,9 +67,12 @@ function initMoment(){
     var imageID = $(sourceDiv).attr('id');
     console.log(imageID);
 
-    addAppLoader();
 
-    putActiveMomentImagePopup(imageID);
+
+    $(".appLoaderDataWrapper").empty();
+
+    setTimeout(function () {putActiveMomentImagePopup(imageID); }, 1500);
+
 
 
 
@@ -100,7 +103,7 @@ function removeAppLoader(){
 
 function putActiveMomentImagePopup(timestamp){
 
-  $(".appLoaderDataWrapper").empty();
+  addAppLoader();
 
   //var imageWrapper = $("<div id='usersImageWrapper' class='moment clearfix'></div>").appendTo("#locationContainer");
 
@@ -477,7 +480,7 @@ function createMoments(imageTimeStamp, count, comment){
 
   var momentImage = imageTimeStamp;
 
-  var momentPanel = $("<div id='parent_" + imageTimeStamp + "' class='momentContainer clearfix'></div>").appendTo('.pad2');
+  var momentPanel = $("<div id='parent_" + imageTimeStamp + "' class='momentContainer'></div>").appendTo('.pad2');
 
   var locationNameWrapper = $("<div id='locationNameWrapper_" + imageTimeStamp + "' class='moment clearfix'></div>").appendTo(momentPanel);
 
@@ -493,7 +496,7 @@ function createMoments(imageTimeStamp, count, comment){
 
   // var momentImageDiv = $('<img width="100%" class="lazy image1" data-original="'  + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + momentImage  + '.jpg" />').appendTo(imageWrapper);
 
-  var momentImageDiv = $('<img width="100%" id="' + imageTimeStamp + '" class="momentimage lazy" src="images/loading.gif" data-original="'  + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + momentImage  + '.jpg" />').appendTo(imageWrapper);
+  var momentImageDiv = $('<img width="100%" id="' + imageTimeStamp + '" class="momentimage lazy" src="images/image_loader.gif" data-original="'  + APP_CONFIG.creds.aws.url + APP_CONFIG.creds.aws.bucketname + "/" + momentImage  + '.jpg" />').appendTo(imageWrapper);
 
   //var momentMapDiv = $("<div id='momentMapDiv' class= 'momentMapDiv'></div>").appendTo(momentPanel);
 
