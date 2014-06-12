@@ -7,7 +7,7 @@ var APP_CONFIG = {
 		*/
 		aws: {
 			url: "https://s3-us-west-2.amazonaws.com/",
-			bucketname: "leapspotleap",
+			bucketname: "lowimageres",
 			observations: "Observations.json",
 			profileImage: "profileImage",
 			profileName: "Rene Rodriguez"
